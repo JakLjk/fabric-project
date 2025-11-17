@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "CopyJob",
+    "displayName": "populateLH_Tables"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f95e339b-83f1-af2f-4894-8f7550dd6125"
+  }
+}
