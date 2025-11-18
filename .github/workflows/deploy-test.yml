@@ -1,8 +1,8 @@
-name: Deploy to DEV
+name: Deploy to PROD
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ test ]
   workflow_dispatch:
     inputs:
       workspaces:
@@ -18,18 +18,19 @@ env:
   AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
   AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     # Optional: use GitHub Environments for approvals
-    environment: dev
+    environment: test
 
     steps:
       - name: Checkout dev branch
         uses: actions/checkout@v4
         with:
-          ref: dev
+          ref: test
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -58,22 +59,22 @@ jobs:
             case "$ws" in
               engineering)
                 python .deploy/deploy.py \
-                  --workspace-id "${{ vars.ENGINEERING_DEV_WS_ID }}" \
-                  --environment DEV \
+                  --workspace-id "${{ vars.ENGINEERING_TEST_WS_ID }}" \
+                  --environment TEST \
                   --repo-dir "./workspace/engineering" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               store)
                 python .deploy/deploy.py \
-                  --workspace-id "${{ vars.STORE_DEV_WS_ID }}" \
-                  --environment DEV \
+                  --workspace-id "${{ vars.STORE_TEST_WS_ID }}" \
+                  --environment TEST \
                   --repo-dir "./workspace/store" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               integration)
                 python .deploy/deploy.py \
-                  --workspace-id "${{ vars.INTEGRATION_DEV_WS_ID }}" \
-                  --environment DEV \
+                  --workspace-id "${{ vars.INTEGRATION_TEST_WS_ID }}" \
+                  --environment TEST \
                   --repo-dir "./workspace/integration" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;

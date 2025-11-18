@@ -1,0 +1,7 @@
+find_replace:
+    # Replace Power BI Text
+    - find_value: "This is a Report in Dev!!!"
+      replace_value:
+        DEV: "This is a Report in DEV!!!"
+        TEST: "This is a Report in TEST!!!"
+        PROD: "This is a Report in Prod!!!"
