@@ -1,0 +1,85 @@
+name: Deploy to PROD
+
+on:
+  push:
+    branches: [ prod ]
+  workflow_dispatch:
+    inputs:
+      workspaces:
+        description: "Comma-separated: engineering,store,integration,orchestration,presentation,insights"
+        required: true
+        default: "engineering,store,integration"
+      items_in_scope:
+        description: "Comma-separated item types"
+        required: true
+        default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report"
+
+env:
+  AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Optional: use GitHub Environments for approvals
+    environment: prod
+
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: prod
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install fabric-cicd
+
+      - name: Azure login (service principal)
+        shell: pwsh
+        run: |
+          Install-Module -Name Az.Accounts -AllowClobber -Force -Scope CurrentUser
+          $sec = ConvertTo-SecureString "$env:AZURE_CLIENT_SECRET" -AsPlainText -Force
+          $creds = New-Object System.Management.Automation.PSCredential ($env:AZURE_CLIENT_ID, $sec)
+          Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant $env:AZURE_TENANT_ID
+          $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
+          Write-Host "Fabric token acquired"
+
+      - name: Deploy selected workspaces to DEV
+        run: |
+          IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'engineering,store,integration,orchestration,presentation,insights' }}"
+          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report' }}"
+
+          for ws in "${WS_LIST[@]}"; do
+            case "$ws" in
+              engineering)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.ENGINEERING_PROD_WS_ID }}" \
+                  --environment PROD \
+                  --repo-dir "./workspace/engineering" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
+              store)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.STORE_PROD_WS_ID }}" \
+                  --environment PROD \
+                  --repo-dir "./workspace/store" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
+              integration)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.INTEGRATION_PROD_WS_ID }}" \
+                  --environment PROD \
+                  --repo-dir "./workspace/integration" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
+              *)
+                echo "Unknown workspace: $ws"
+                ;;
+            esac
+          done
