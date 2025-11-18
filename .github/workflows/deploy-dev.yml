@@ -8,7 +8,7 @@ on:
       workspaces:
         description: "Comma-separated: engineering,store,integration,orchestration,presentation,insights"
         required: true
-        default: "engineering,store,integration,orchestration,presentation,insights"
+        default: "engineering,store,integration"
       items_in_scope:
         description: "Comma-separated item types"
         required: true
@@ -75,27 +75,6 @@ jobs:
                   --workspace-id "${{ vars.INTEGRATION_DEV_WS_ID }}" \
                   --environment DEV \
                   --repo-dir "./workspace/integration" \
-                  --items-in-scope "$ITEMS_IN_SCOPE"
-                ;;
-              orchestration)
-                python .deploy/deploy.py \
-                  --workspace-id "${{ vars.ORCHESTRATION_DEV_WS_ID }}" \
-                  --environment DEV \
-                  --repo-dir "./workspace/orchestration" \
-                  --items-in-scope "$ITEMS_IN_SCOPE"
-                ;;
-              presentation)
-                python .deploy/deploy.py \
-                  --workspace-id "${{ vars.PRESENTATION_DEV_WS_ID }}" \
-                  --environment DEV \
-                  --repo-dir "./workspace/presentation" \
-                  --items-in-scope "$ITEMS_IN_SCOPE"
-                ;;
-              insights)
-                python .deploy/deploy.py \
-                  --workspace-id "${{ vars.INSIGHTS_DEV_WS_ID }}" \
-                  --environment DEV \
-                  --repo-dir "./workspace/insights" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               *)
