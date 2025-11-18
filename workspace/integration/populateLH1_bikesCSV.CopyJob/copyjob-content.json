@@ -1,0 +1,82 @@
+{
+  "properties": {
+    "jobMode": "Batch",
+    "source": {
+      "type": "DelimitedText",
+      "connectionSettings": {
+        "type": "HttpServer",
+        "externalReferences": {
+          "connection": "8a305a8e-8b3c-4bee-ad97-abcb341ef4b2"
+        }
+      }
+    },
+    "destination": {
+      "type": "DelimitedText",
+      "connectionSettings": {
+        "type": "Lakehouse",
+        "typeProperties": {
+          "workspaceId": "412e9e96-5a6e-48f9-afeb-a02917a58965",
+          "artifactId": "39744a72-13a7-4928-92c7-16a2a86c96c7",
+          "rootFolder": "Files"
+        },
+        "externalReferences": {
+          "connection": "04b9c9b3-695c-4d9f-9b28-0c13105e997a"
+        }
+      }
+    },
+    "policy": {
+      "timeout": "0.12:00:00"
+    }
+  },
+  "activities": [
+    {
+      "id": "02bd2738-91f0-49ab-a825-213617675104",
+      "properties": {
+        "source": {
+          "datasetSettings": {
+            "location": {
+              "type": "HttpServerLocation"
+            },
+            "columnDelimiter": ",",
+            "rowDelimiter": "\n",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+          },
+          "storeSettings": {
+            "requestMethod": "GET"
+          },
+          "formatSettings": {}
+        },
+        "destination": {
+          "datasetSettings": {
+            "location": {
+              "type": "LakehouseLocation",
+              "fileName": "bikes.csv"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+          },
+          "storeSettings": {
+            "copyBehavior": "PreserveHierarchy"
+          },
+          "formatSettings": {
+            "fileExtension": ".txt"
+          }
+        },
+        "enableStaging": false,
+        "translator": {
+          "type": "TabularTranslator"
+        },
+        "typeConversionSettings": {
+          "typeConversion": {
+            "allowDataTruncation": true,
+            "treatBooleanAsNumber": false
+          }
+        }
+      }
+    }
+  ]
+}
