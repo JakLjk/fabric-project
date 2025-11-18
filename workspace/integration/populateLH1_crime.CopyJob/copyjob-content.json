@@ -2,22 +2,22 @@
   "properties": {
     "jobMode": "Batch",
     "source": {
-      "type": "Parquet",
+      "type": "DelimitedText",
       "connectionSettings": {
-        "type": "AzureBlobStorage",
-        "typeProperties": {
-          "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+        "type": "HttpServer",
+        "externalReferences": {
+          "connection": "73e33768-52cb-486e-8738-a5f62c11f3ab"
         }
       }
     },
     "destination": {
-      "type": "LakehouseTable",
+      "type": "DelimitedText",
       "connectionSettings": {
         "type": "Lakehouse",
         "typeProperties": {
           "workspaceId": "412e9e96-5a6e-48f9-afeb-a02917a58965",
           "artifactId": "39744a72-13a7-4928-92c7-16a2a86c96c7",
-          "rootFolder": "Tables"
+          "rootFolder": "Files"
         },
         "externalReferences": {
           "connection": "04b9c9b3-695c-4d9f-9b28-0c13105e997a"
@@ -30,26 +30,39 @@
   },
   "activities": [
     {
-      "id": "934bafb2-b400-45c1-a7c5-750f4cb48871",
+      "id": "31f1bc17-37ce-48e1-98bf-914272d4ceb7",
       "properties": {
         "source": {
           "datasetSettings": {
             "location": {
-              "type": "AzureBlobStorageLocation",
-              "container": "sampledata"
+              "type": "HttpServerLocation",
+              "relativeUrl": "/cambridgecoding/machinelearningregression/refs/heads/master/data/crime.csv"
             },
-            "compressionCodec": "snappy"
+            "columnDelimiter": ",",
+            "rowDelimiter": "\n",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
           },
           "storeSettings": {
-            "recursive": true,
-            "wildcardFolderPath": "WideWorldImportersDW/parquet/full/fact_sale",
-            "wildcardFileName": "*.parquet"
-          }
+            "requestMethod": "GET"
+          },
+          "formatSettings": {}
         },
         "destination": {
-          "writeBehavior": "Append",
           "datasetSettings": {
-            "table": "factTable_WWI"
+            "location": {
+              "type": "LakehouseLocation",
+              "fileName": "crimes.csv"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+          },
+          "storeSettings": {},
+          "formatSettings": {
+            "fileExtension": ".txt"
           }
         },
         "enableStaging": false,
