@@ -6,7 +6,7 @@
       "connectionSettings": {
         "type": "HttpServer",
         "externalReferences": {
-          "connection": "8a305a8e-8b3c-4bee-ad97-abcb341ef4b2"
+          "connection": "73e33768-52cb-486e-8738-a5f62c11f3ab"
         }
       }
     },
@@ -30,12 +30,13 @@
   },
   "activities": [
     {
-      "id": "02bd2738-91f0-49ab-a825-213617675104",
+      "id": "e586ccae-82e5-4bf5-984d-b26a2a71d580",
       "properties": {
         "source": {
           "datasetSettings": {
             "location": {
-              "type": "HttpServerLocation"
+              "type": "HttpServerLocation",
+              "relativeUrl": "/cambridgecoding/machinelearningregression/refs/heads/master/data/bikes.csv"
             },
             "columnDelimiter": ",",
             "rowDelimiter": "\n",
@@ -52,16 +53,14 @@
           "datasetSettings": {
             "location": {
               "type": "LakehouseLocation",
-              "fileName": "bikes.csv"
+              "fileName": "bikes2.csv"
             },
             "columnDelimiter": ",",
             "escapeChar": "\\",
             "firstRowAsHeader": true,
             "quoteChar": "\""
           },
-          "storeSettings": {
-            "copyBehavior": "PreserveHierarchy"
-          },
+          "storeSettings": {},
           "formatSettings": {
             "fileExtension": ".txt"
           }

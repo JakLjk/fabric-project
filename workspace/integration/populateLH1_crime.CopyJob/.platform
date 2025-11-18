@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "DataPipeline",
-    "displayName": "populateLH_diabetesCSV"
+    "type": "CopyJob",
+    "displayName": "populateLH1_crime"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "28a480ca-e851-bc95-41f3-e1605e8c8ef2"
+    "logicalId": "41af75a3-c445-a97a-4710-8e2796fe4e5f"
   }
 }
