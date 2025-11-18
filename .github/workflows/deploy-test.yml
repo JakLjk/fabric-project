@@ -1,4 +1,4 @@
-name: Deploy to PROD
+name: Deploy to TEST
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       items_in_scope:
         description: "Comma-separated item types"
         required: true
-        default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report"
+        default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob"
 
 env:
   AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
@@ -27,7 +27,7 @@ jobs:
     environment: test
 
     steps:
-      - name: Checkout dev branch
+      - name: Checkout test branch
         uses: actions/checkout@v4
         with:
           ref: test
@@ -50,7 +50,7 @@ jobs:
           $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
           Write-Host "Fabric token acquired"
 
-      - name: Deploy selected workspaces to DEV
+      - name: Deploy selected workspaces to TEST
         run: |
           IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'engineering,store,integration,orchestration,presentation,insights' }}"
           ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report' }}"

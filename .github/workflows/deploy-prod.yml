@@ -12,7 +12,7 @@ on:
       items_in_scope:
         description: "Comma-separated item types"
         required: true
-        default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report"
+        default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob"
 
 env:
   AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
