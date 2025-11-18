@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "CopyJob",
+    "displayName": "populateLH1_bikesCSV"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6330933f-687a-a108-45fb-e364a84261a4"
+  }
+}
