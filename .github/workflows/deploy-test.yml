@@ -83,3 +83,9 @@ jobs:
                 ;;
             esac
           done
+
+      - name: Show Fabric CI/CD error log
+        if: failure()          # or `always()` if you want it even on success
+        run: |
+          echo "===== fabric_cicd.error.log ====="
+          cat /home/runner/work/fabric-project/fabric-project/fabric_cicd.error.log
