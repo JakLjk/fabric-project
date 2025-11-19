@@ -1,23 +1,23 @@
 {
   "formatVersion": "202502",
   "computeEngineSettings": {},
-  "name": "testDataflowHTTPSalesLH1",
+  "name": "df_populate_LH1_with_bikes_",
   "queryGroups": [],
   "documentLocale": "en-US",
   "queriesMetadata": {
     "Query": {
-      "queryId": "10e44d94-b14b-4b3f-bfc3-15f1704aba5a",
+      "queryId": "3b514c4a-1615-4677-9806-5624c0a5545c",
       "queryName": "Query",
       "loadEnabled": false
     },
     "Query_DataDestination": {
-      "queryId": "bdcd2dd2-5ca1-41bf-aa39-1428ba31e435",
+      "queryId": "315f8e7c-fc37-4265-ad3f-8b394901f688",
       "queryName": "Query_DataDestination",
       "isHidden": true,
       "loadEnabled": false
     },
     "Query_DataDestinationTransform": {
-      "queryId": "7a265546-9b9b-4fb4-83be-d2d785f670f9",
+      "queryId": "1bff72e3-d8f0-4f38-b757-58c18b4de249",
       "queryName": "Query_DataDestinationTransform",
       "isHidden": true,
       "loadEnabled": false
@@ -25,14 +25,14 @@
   },
   "connections": [
     {
-      "path": "https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv",
+      "path": "https://raw.githubusercontent.com",
       "kind": "Web",
-      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"352212fd-957f-4a70-a529-36839190e83f\"}"
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"d032a341-9c2a-4e66-82b1-ad4b8f333ba1\"}"
     },
     {
       "path": "Lakehouse",
       "kind": "Lakehouse",
-      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"38f87561-41eb-48ef-891b-8ffc097b9bb4\"}"
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"04b9c9b3-695c-4d9f-9b28-0c13105e997a\"}"
     }
   ]
 }
