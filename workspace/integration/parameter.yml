@@ -1,15 +1,16 @@
-find_replace:
-    ## Replace workspace ID pointing to DEV workspace
-    - find_value: 412e9e96-5a6e-48f9-afeb-a02917a58965
-      replace_value:
+# Rules for DataFlows
+find_replace: 
+  # Replace Store Workspace GUID
+  - find_value: Navigation_1\s*=\s*Pattern\{\[workspaceId\s*=\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"\]\}
+    replace_value:
         DEV: $workspace.devStore
         TEST: $workspace.testStore
         PROD: $workspace.prodStore
 
-
-    ## Replace connection ID pointing to DEV lakehouse testLH1
-    - find_value: 39744a72-13a7-4928-92c7-16a2a86c96c7
-      replace_value:
+  # Replace Source Lakehouse GUID
+  - find_value: Navigation_2\s*=\s*Navigation_1\{\[lakehouseId\s*=\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"\]\}
+    replace_value:
         DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
         TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
         PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
+
