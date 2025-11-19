@@ -9,8 +9,8 @@ in
   #"Changed column type";
 shared Query_DataDestination = let
   Pattern = Lakehouse.Contents([HierarchicalNavigation = null, CreateNavigationProperties = false, EnableFolding = false]),
-  Navigation_1 = Pattern{[workspaceId = "fcfc2303-83f0-4cb4-9718-0b0ead9604bf"]}[Data],
-  Navigation_2 = Navigation_1{[lakehouseId = "6f8572d3-b55c-47e0-af35-e75808ee65e7"]}[Data],
+  Navigation_1 = Pattern{[workspaceId = "412e9e96-5a6e-48f9-afeb-a02917a58965"]}[Data],
+  Navigation_2 = Navigation_1{[lakehouseId = "39744a72-13a7-4928-92c7-16a2a86c96c7"]}[Data],
   Navigation_3 = Navigation_2{[Id = "Files", ItemKind = "Folder"]}[Data],
   FileNavigation = Navigation_3{[Name = "bikes.csv"]}?[Content]?
 in
