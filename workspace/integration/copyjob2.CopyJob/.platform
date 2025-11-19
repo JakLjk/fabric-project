@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "CopyJob",
-    "displayName": "populateLH1_crime"
+    "displayName": "copyjob2"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "41af75a3-c445-a97a-4710-8e2796fe4e5f"
+    "logicalId": "264e83eb-83ab-b32b-48f5-c8d7b2d91dff"
   }
 }
