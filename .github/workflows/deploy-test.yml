@@ -3,16 +3,16 @@ name: Deploy to TEST
 on:
   push:
     branches: [ test ]
-  workflow_dispatch:
-    inputs:
-      workspaces:
-        description: "Comma-separated: engineering,store,integration,orchestration,presentation,insights"
-        required: true
-        default: "engineering,store,integration"
-      items_in_scope:
-        description: "Comma-separated item types"
-        required: true
-        default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow"
+  # workflow_dispatch:
+  #   inputs:
+  #     workspaces:
+  #       description: "Comma-separated: engineering,store,integration,orchestration,presentation,insights"
+  #       required: true
+  #       default: "engineering,store,integration"
+  #     items_in_scope:
+  #       description: "Comma-separated item types"
+  #       required: true
+  #       default: "Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow"
 
 env:
   AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
@@ -53,7 +53,7 @@ jobs:
       - name: Deploy selected workspaces to TEST
         run: |
           IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'engineering,store,integration,orchestration,presentation,insights' }}"
-          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow' }}"
+          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow,Warehouse' }}"
 
           for ws in "${WS_LIST[@]}"; do
             case "$ws" in
