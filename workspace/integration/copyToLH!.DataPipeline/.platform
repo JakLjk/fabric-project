@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "CopyJob",
-    "displayName": "populateLH1_bikes2"
+    "type": "DataPipeline",
+    "displayName": "copyToLH!"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "0b8cd832-ec5d-b395-4c85-1a68da674fa5"
+    "logicalId": "a12675aa-89d6-9474-4482-e98bf9c00270"
   }
 }
