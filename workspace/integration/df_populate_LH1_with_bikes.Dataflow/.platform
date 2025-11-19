@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "testDataFlow"
+    "displayName": "df_populate_LH1_with_bikes"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "221b80d0-78ba-99e9-4118-c0536d76542f"
+    "logicalId": "5c47df99-2e3d-96b9-4496-ad71cd4271e4"
   }
 }
