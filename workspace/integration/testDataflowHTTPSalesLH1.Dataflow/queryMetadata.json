@@ -1,0 +1,38 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "testDataflowHTTPSalesLH1",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "Query": {
+      "queryId": "10e44d94-b14b-4b3f-bfc3-15f1704aba5a",
+      "queryName": "Query",
+      "loadEnabled": false
+    },
+    "Query_DataDestination": {
+      "queryId": "bdcd2dd2-5ca1-41bf-aa39-1428ba31e435",
+      "queryName": "Query_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "Query_DataDestinationTransform": {
+      "queryId": "7a265546-9b9b-4fb4-83be-d2d785f670f9",
+      "queryName": "Query_DataDestinationTransform",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "https://raw.githubusercontent.com/MicrosoftLearning/dp-data/main/sales.csv",
+      "kind": "Web",
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"352212fd-957f-4a70-a529-36839190e83f\"}"
+    },
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"38f87561-41eb-48ef-891b-8ffc097b9bb4\"}"
+    }
+  ]
+}
