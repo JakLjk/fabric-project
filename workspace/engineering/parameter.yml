@@ -1,7 +1,24 @@
 find_replace:
-    # Replace Power BI Text
-    - find_value: "This is a Report in Dev!!!"
-      replace_value:
-        DEV: "This is a Report in DEV!!!"
-        TEST: "This is a Report in TEST!!!"
-        PROD: "This is a Report in Prod!!!"
+  # Replace default DEV lakehouse for notebook
+  - find_value: 39744a72-13a7-4928-92c7-16a2a86c96c7
+    replace_value: 
+      DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
+      TEST: $workspace.devStore.$items.Lakehouse.testLH1.$id
+      PROD: $workspace.devStore.$items.Lakehouse.testLH1.$id
+    file_path: nt_transform_bikes_data_LH1.Notebook/notebook-content.py
+  # Replace default DEV worksace for notebook
+  - find_value: 412e9e96-5a6e-48f9-afeb-a02917a58965
+    replace_value:
+      DEV: $workspace.devStore
+      TEST: $workspace.testStore
+      PROD: $workspace.prodStore
+    file_path: nt_transform_bikes_data_LH1.Notebook/notebook-content.py
+
+  # Replace default DEV Azure Blob File Storage connection string
+  - find_value: abfss://([^@]+)@onelake\.dfs\.fabric\.microsoft\.com/testLH1\.Lakehouse
+    replace_value:
+      DEV: devStore
+      TEST: testStore
+      PROD: prodStore
+    file_path: nt_transform_fact_sales_from_mainLH1_to_testLH1.Notebook/notebook-content.py
+  
