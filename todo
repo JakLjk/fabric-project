@@ -1,0 +1,10 @@
+check dataflows and automatic publishing so they can run 
+add notebooks that work on the data imported by dataflows
+add data pipelines that launch the notebooks 
+add schedules
+add semantic model
+add raport
+
+
+add unit tests
+add integration tests
