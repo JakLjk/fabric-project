@@ -3,14 +3,16 @@ find_replace:
   # Replace Store Workspace GUID
   - find_value: Navigation_1\s*=\s*Pattern\{\[workspaceId\s*=\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"\]\}
     replace_value:
-        DEV: $workspace.devStore
-        TEST: $workspace.testStore
-        PROD: $workspace.prodStore
+      DEV: $workspace.devStore
+      TEST: $workspace.testStore
+      PROD: $workspace.prodStore
+    is_regex: "true"
 
   # Replace Source Lakehouse GUID
   - find_value: Navigation_2\s*=\s*Navigation_1\{\[lakehouseId\s*=\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"\]\}
     replace_value:
-        DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
-        TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
-        PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
+      DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
+      TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
+      PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
+    is_regex: "true"
 
