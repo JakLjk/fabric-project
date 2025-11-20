@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "df_populate_testLH2_from_mainLH1"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a060899b-3dd5-b54a-4ada-36255b22f9de"
+  }
+}

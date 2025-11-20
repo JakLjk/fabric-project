@@ -1,0 +1,49 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "df_populate_testLH1_from_mainLH1",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "dimension_city": {
+      "queryId": "f7a5ccb4-477e-42d2-bcbe-edd59f99f457",
+      "queryName": "dimension_city",
+      "loadEnabled": false
+    },
+    "dimension_customer": {
+      "queryId": "2f3a3b5f-f51e-4151-a130-d90b2e0c5480",
+      "queryName": "dimension_customer",
+      "loadEnabled": false
+    },
+    "dimension_date": {
+      "queryId": "fec25209-3390-4ab2-8afe-db9d877c4fdd",
+      "queryName": "dimension_date",
+      "loadEnabled": false
+    },
+    "dimension_city_DataDestination": {
+      "queryId": "6e03bb39-d733-4d66-a282-94f3b584c587",
+      "queryName": "dimension_city_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dimension_customer_DataDestination": {
+      "queryId": "2cc1a787-02cc-413f-9207-bddfd5606f2b",
+      "queryName": "dimension_customer_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dimension_date_DataDestination": {
+      "queryId": "8d557938-c445-446f-8153-02a80217f31f",
+      "queryName": "dimension_date_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"04b9c9b3-695c-4d9f-9b28-0c13105e997a\"}"
+    }
+  ]
+}
