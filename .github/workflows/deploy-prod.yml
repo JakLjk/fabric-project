@@ -1,8 +1,8 @@
-name: Deploy to PROD
+name: Deploy to PROD/MAIN
 
 on:
   push:
-    branches: [ prod ]
+    branches: [ main ]
   # workflow_dispatch:
   #   inputs:
   #     workspaces:
@@ -24,13 +24,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     # Optional: use GitHub Environments for approvals
-    environment: prod
+    environment: main
 
     steps:
-      - name: Checkout dev branch
+      - name: Checkout prod branch
         uses: actions/checkout@v4
         with:
-          ref: prod
+          ref: main
 
       - name: Setup Python
         uses: actions/setup-python@v5
