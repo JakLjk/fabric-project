@@ -53,7 +53,7 @@ jobs:
       - name: Deploy selected workspaces to TEST
         run: |
           IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'engineering,store,integration,orchestration,presentation,insights' }}"
-          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow,Warehouse' }}"
+          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow,Warehouse,Environment' }}"
 
           for ws in "${WS_LIST[@]}"; do
             case "$ws" in
