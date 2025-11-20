@@ -3,8 +3,8 @@ find_replace:
   - find_value:  \#\s*META\s+"default_lakehouse":\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"
     replace_value: 
       DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
-      TEST: $workspace.devStore.$items.Lakehouse.testLH1.$id
-      PROD: $workspace.devStore.$items.Lakehouse.testLH1.$id
+      TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
+      PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
     is_regex: "true"
     file_path: nt_transform_bikes_data_LH1.Notebook/notebook-content.py
   # Replace default DEV worksace for notebook
@@ -14,6 +14,15 @@ find_replace:
       TEST: $workspace.testStore
       PROD: $workspace.prodStore
     is_regex: "true"
+    file_path: nt_transform_bikes_data_LH1.Notebook/notebook-content.py
+
+  # Replace Environment
+  - find_value: 16a706e6-f03e-a26c-4feb-e20ddb63359c"
+    replace_value:
+      DEV: $workspace.devStore.$items.Environment.env_testEnv.$id
+      TEST: $workspace.testStore.$items.Environment.env_testEnv.$id
+      PROD: $workspace.prodStore.$items.Environment.env_testEnv.$id
+    is_regex: "false"
     file_path: nt_transform_bikes_data_LH1.Notebook/notebook-content.py
 
   # Replace default DEV Azure Blob File Storage connection string
