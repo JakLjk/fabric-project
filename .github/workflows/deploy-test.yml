@@ -57,18 +57,18 @@ jobs:
 
           for ws in "${WS_LIST[@]}"; do
             case "$ws" in
+                store)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.STORE_TEST_WS_ID }}" \
+                  --environment TEST \
+                  --repo-dir "./workspace/store" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
               engineering)
                 python .deploy/deploy.py \
                   --workspace-id "${{ vars.ENGINEERING_TEST_WS_ID }}" \
                   --environment TEST \
                   --repo-dir "./workspace/engineering" \
-                  --items-in-scope "$ITEMS_IN_SCOPE"
-                ;;
-              store)
-                python .deploy/deploy.py \
-                  --workspace-id "${{ vars.STORE_TEST_WS_ID }}" \
-                  --environment TEST \
-                  --repo-dir "./workspace/store" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               integration)
