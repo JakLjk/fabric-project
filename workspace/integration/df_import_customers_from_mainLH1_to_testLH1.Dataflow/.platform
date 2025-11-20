@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "df_populate_testLH1_with_mainLH1"
+    "displayName": "df_import_customers_from_mainLH1_to_testLH1"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "a3762915-a1cb-b4fc-48b6-4b5d50ad7b6f"
+    "logicalId": "63fa5b5b-8485-96e2-4414-613e02ede858"
   }
 }
