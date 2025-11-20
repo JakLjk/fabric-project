@@ -1,5 +1,6 @@
-check dataflows and automatic publishing so they can run 
-add notebooks that work on the data imported by dataflows
+dataflow copying data form testLH1 to testLH2
+copy job
+
 add data pipelines that launch the notebooks 
 add schedules
 add semantic model
