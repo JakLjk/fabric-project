@@ -1,22 +1,22 @@
 # Rules for DataFlows
 find_replace: 
-  # Replace Store Workspace GUID for specific dataflow
+  # Replace Sink Workspace GUID
   - find_value: Navigation_1\s*=\s*Pattern\{\[workspaceId\s*=\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"\]\}
     replace_value:
       DEV: $workspace.devStore
       TEST: $workspace.testStore
       PROD: $workspace.prodStore
     is_regex: "true"
-    file_path: df_populate_LH1_with_bikes.Dataflow/mashup.pq
+    file_path: df_populate_testLH1_with_sourceLH1.Dataflow/mashup.pq
 
-  # Replace Source Lakehouse GUID for specific dataflos
+  # Replace Sink Lakehouse GUID
   - find_value: Navigation_2\s*=\s*Navigation_1\{\[lakehouseId\s*=\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"\]\}
     replace_value:
       DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
       TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
       PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
     is_regex: "true"
-    file_path: df_populate_LH1_with_bikes.Dataflow/mashup.pq
+    file_path: df_populate_testLH1_with_sourceLH1.Dataflow/mashup.pq
 
 
 
