@@ -38,7 +38,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install fabric-cicd
+        run: pip install fabric-cicd azure-identity requests
 
       # - name: Azure login (service principal)
       #   shell: pwsh
@@ -90,5 +90,11 @@ jobs:
           echo "===== fabric_cicd.error.log ====="
           cat /home/runner/work/fabric-project/fabric-project/fabric_cicd.error.log
 
-      # - name: Run ApplyChanges to Deploy all Dataflows
-      #   shell: 
+      - name: Run ApplyChanges to Deploy all Dataflows in integration workspace
+        shell: bash
+        run: |
+          python .deploy/applyChanges.py \
+            --tenant-id "${{ secrets.AZURE_TENANT_ID }}" \
+            --client-id "${{ secrets.AZURE_CLIENT_ID }}" \
+            --client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" 
+            --workspace-id "${{ vars.INTEGRATION_TEST_WS_ID }}"
