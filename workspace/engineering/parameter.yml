@@ -28,4 +28,5 @@ find_replace:
       DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
       TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
       PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
+    is_regex: "true"
     file_path: nt_transform_sales_data_testLH1.Notebook/notebook-content.py
