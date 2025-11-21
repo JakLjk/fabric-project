@@ -1,7 +1,32 @@
+
 find_replace:
-    # Replace Power BI Text
-    - find_value: "This is a Report in Dev!!!"
-      replace_value:
-        DEV: "This is a Report in DEV!!!"
-        TEST: "This is a Report in TEST!!!"
-        PROD: "This is a Report in Prod!!!"
+
+  # Rules for nt_move_sales_city_from_testLH1_to_testLH2.Notebook
+  # Replace workspace name in ABFSS string
+  - find_value: abfss://([^@]+)@onelake\.dfs\.fabric\.microsoft\.com/testLH1\.Lakehouse
+    replace_value:
+      DEV: devStore
+      TEST: testStore
+      PROD: prodStore
+    is_regex: "true"
+    file_path: nt_move_sales_city_from_testLH1_to_testLH2.Notebook/notebook-content.py
+
+
+# Rules for nt_transform_sales_data_testLH1.Notebook
+  # Replace workspace GUID in default lakehouse 
+  - find_value: \#\s*META\s+"default_lakehouse_workspace_id":\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"
+    replace_value:
+      DEV: $workspace.devStore
+      TEST: $workspace.testStore
+      PROD: $workspace.prodStore
+    is_regex: "true"
+    file_path: nt_transform_sales_data_testLH1.Notebook/notebook-content.py
+
+  # Replace default lakehouse GUID
+  - find_value: \#\s*META\s+"default_lakehouse":\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"
+    replace_value:
+      DEV: $workspace.devStore.$items.Lakehouse.testLH1.$id
+      TEST: $workspace.testStore.$items.Lakehouse.testLH1.$id
+      PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$id
+    is_regex: "true"
+    file_path: nt_transform_sales_data_testLH1.Notebook/notebook-content.py
