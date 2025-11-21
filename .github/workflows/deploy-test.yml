@@ -105,3 +105,8 @@ jobs:
             --client-id "${{ secrets.AZURE_CLIENT_ID }}" \
             --client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" \
             --workspace-id "${{ vars.INTEGRATION_TEST_WS_ID }}" 
+
+
+      - name: Run pipeline responsible for hydrating storages with data.
+        run: |
+          fab job run testOrchestration.Workspace
