@@ -1,11 +1,17 @@
-dataflow copying data form testLH1 to testLH2
 copy job
 
-add data pipelines that launch the notebooks 
+add data pipelines that launch the notebooks/dataflows/copy
 add schedules
 add semantic model
 add raport
 
 
 add unit tests
+
+after publishing:
+ - are correct lakehouses connected
+
+
 add integration tests
+
+automatic adding of users 
