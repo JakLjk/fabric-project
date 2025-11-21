@@ -1,0 +1,82 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "df_populate_testLH1_with_sourceLH1",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "dimension_city": {
+      "queryId": "ec4b27c4-59ed-439f-8819-761dc03492da",
+      "queryName": "dimension_city",
+      "loadEnabled": false
+    },
+    "dimension_customer": {
+      "queryId": "9fec83ae-099e-4a6a-95c7-f8a41cebd9fb",
+      "queryName": "dimension_customer",
+      "loadEnabled": false
+    },
+    "dimension_date": {
+      "queryId": "b716d605-513b-4898-859c-ebc0eb8feca8",
+      "queryName": "dimension_date",
+      "loadEnabled": false
+    },
+    "dimension_employee": {
+      "queryId": "b4aa1235-e656-40c1-9f6f-a3d668863814",
+      "queryName": "dimension_employee",
+      "loadEnabled": false
+    },
+    "dimension_stock_item": {
+      "queryId": "2199e74a-59db-4c53-8d25-91e23933a5b0",
+      "queryName": "dimension_stock_item",
+      "loadEnabled": false
+    },
+    "fact_sale": {
+      "queryId": "fae40290-a720-4cd9-a853-8f65b031ec54",
+      "queryName": "fact_sale",
+      "loadEnabled": false
+    },
+    "dimension_city_DataDestination": {
+      "queryId": "c5f87e37-5186-4b61-83f1-30c1021532b0",
+      "queryName": "dimension_city_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dimension_customer_DataDestination": {
+      "queryId": "775b98a4-a324-4da9-9fc2-599c71215df5",
+      "queryName": "dimension_customer_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dimension_date_DataDestination": {
+      "queryId": "4822352e-f09b-464d-9537-577812ecbe1e",
+      "queryName": "dimension_date_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dimension_employee_DataDestination": {
+      "queryId": "4d5a21de-767f-4145-a572-1104b51ed167",
+      "queryName": "dimension_employee_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dimension_stock_item_DataDestination": {
+      "queryId": "54373d6d-7dc1-4615-8e2f-9b92142227a8",
+      "queryName": "dimension_stock_item_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "fact_sale_DataDestination": {
+      "queryId": "8007f942-acb0-4176-a146-0e64e7d91240",
+      "queryName": "fact_sale_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"04b9c9b3-695c-4d9f-9b28-0c13105e997a\"}"
+    }
+  ]
+}

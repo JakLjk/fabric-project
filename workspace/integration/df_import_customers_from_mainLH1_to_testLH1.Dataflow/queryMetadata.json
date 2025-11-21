@@ -1,0 +1,33 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "df_import_customers_from_mainLH1_to_testLH1",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "customers csv": {
+      "queryId": "6e0583b4-34bd-4bef-9ff2-f63a4310d916",
+      "queryName": "customers csv",
+      "loadEnabled": false
+    },
+    "customers csv_DataDestination": {
+      "queryId": "22eae02a-ba0f-4102-b8b5-f5887cfe28db",
+      "queryName": "customers csv_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "customers csv_DataDestinationTransform": {
+      "queryId": "5e7732e0-0464-4b31-8d8c-84314df08068",
+      "queryName": "customers csv_DataDestinationTransform",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"04b9c9b3-695c-4d9f-9b28-0c13105e997a\"}"
+    }
+  ]
+}
