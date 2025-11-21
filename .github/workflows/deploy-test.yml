@@ -109,4 +109,4 @@ jobs:
 
       - name: Run pipeline responsible for hydrating storages with data.
         run: |
-          fab job run testOrchestration.Workspace
+          fab job run testOrchestration.Workspace/pip_orchestrateDataRefresh.DataPipeline
