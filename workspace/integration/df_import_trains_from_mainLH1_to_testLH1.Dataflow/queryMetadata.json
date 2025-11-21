@@ -1,0 +1,33 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "df_import_trains_from_mainLH1_to_testLH1",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "train csv": {
+      "queryId": "021c6845-f37f-4ac4-9b76-fd56e831aaa1",
+      "queryName": "train csv",
+      "loadEnabled": false
+    },
+    "train csv_DataDestination": {
+      "queryId": "a8a69bb7-8e72-452d-aa8d-e98c8fd5315b",
+      "queryName": "train csv_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "train csv_DataDestinationTransform": {
+      "queryId": "e52328d2-4315-4b0c-811f-ce849b1dc7d4",
+      "queryName": "train csv_DataDestinationTransform",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Lakehouse",
+      "kind": "Lakehouse",
+      "connectionId": "{\"ClusterId\":\"a65c84b0-dfd4-456d-9079-fdebc1a63f50\",\"DatasourceId\":\"04b9c9b3-695c-4d9f-9b28-0c13105e997a\"}"
+    }
+  ]
+}
