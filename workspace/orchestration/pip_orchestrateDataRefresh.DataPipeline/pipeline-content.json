@@ -1,5 +1,108 @@
 {
   "properties": {
-    "activities": []
+    "activities": [
+      {
+        "name": "Dataflow1",
+        "type": "RefreshDataflow",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "b043e334-6f96-4789-9718-c754fc68121d",
+          "workspaceId": "be7d8849-dcdc-42f6-b61b-ab60499781bd",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        }
+      },
+      {
+        "name": "Notebook1",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "Dataflow1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "161e5167-1fc9-4936-b4ee-6f86efecc510",
+          "workspaceId": "47c3cbed-97ab-4c60-92e4-7dc4bc572d65"
+        }
+      },
+      {
+        "name": "Notebook2",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "Notebook1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "a39158fc-6adf-48aa-8254-a2b6cb8baef8",
+          "workspaceId": "47c3cbed-97ab-4c60-92e4-7dc4bc572d65"
+        }
+      },
+      {
+        "name": "Copy job1",
+        "type": "InvokeCopyJob",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "copyJobId": "b200e5eb-3536-49b2-b23a-300fed437298",
+          "workspaceId": "be7d8849-dcdc-42f6-b61b-ab60499781bd",
+          "operationType": "RunCopyJob"
+        },
+        "externalReferences": {
+          "connection": "35609129-a863-4de1-af29-b4da41d606cb"
+        }
+      },
+      {
+        "name": "Dataflow2",
+        "type": "RefreshDataflow",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "dataflowId": "e45258aa-85a3-45fd-901b-a3c59caf59d7",
+          "workspaceId": "be7d8849-dcdc-42f6-b61b-ab60499781bd",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        }
+      }
+    ]
   }
 }
