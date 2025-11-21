@@ -11,14 +11,14 @@ find_replace:
       DEV: $workspace.devEngineering
       TEST: $workspace.testEngineering
       PROD: $workspace.prodEngineering
-      
+    
 
-  # replace dev Dataflow GUID of df_populate_testLH1_with_sourceLH1
+  # replace dev Dataflow GUID of df_populate_testLH1_with_mainLH1
   - find_value: b043e334-6f96-4789-9718-c754fc68121d
     replace_value:
-      DEV: $workspace.devIntegration.$items.Dataflow.df_populate_testLH1_with_sourceLH1.$id
-      TEST: $workspace.testIntegration.$items.Dataflow.df_populate_testLH1_with_sourceLH1.$id
-      PROD: $workspace.prodIntegration.$items.Dataflow.df_populate_testLH1_with_sourceLH1.$id
+      DEV: $workspace.devIntegration.$items.Dataflow.df_populate_testLH1_with_mainLH1.$id
+      TEST: $workspace.testIntegration.$items.Dataflow.df_populate_testLH1_with_mainLH1.$id
+      PROD: $workspace.prodIntegration.$items.Dataflow.df_populate_testLH1_with_mainLH1.$id
 
   # replace dev Notebook GUID of nt_transform_sales_data_testLH1
   - find_value: 161e5167-1fc9-4936-b4ee-6f86efecc510
