@@ -1,8 +1,9 @@
 
-# Rules for nt_move_sales_city_from_testLH1_to_testLH2.Notebook
 find_replace:
+
+  # Rules for nt_move_sales_city_from_testLH1_to_testLH2.Notebook
   # Replace workspace name in ABFSS string
-  - find_value: abfss://([^@]+)@onelake\.dfs\.fabric\.microsoft\.com/testLH1.Lakehouse
+  - find_value: abfss://([^@]+)@onelake\.dfs\.fabric\.microsoft\.com/testLH1\.Lakehouse
     replace_value:
       DEV: devStore
       TEST: testStore
@@ -12,7 +13,6 @@ find_replace:
 
 
 # Rules for nt_transform_sales_data_testLH1.Notebook
-find_replace:
   # Replace workspace GUID in default lakehouse 
   - find_value: \#\s*META\s+"default_lakehouse_workspace_id":\s*"([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})"
     replace_value:
