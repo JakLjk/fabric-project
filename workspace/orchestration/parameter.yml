@@ -1,0 +1,49 @@
+find_replace:
+  # replace dev integration workspace GUIDs
+  - find_value: be7d8849-dcdc-42f6-b61b-ab60499781bd
+    replace_value:
+      DEV: $workspace.devIntegration
+      TEST: $workspace.testIntegration
+      PROD: $workspace.prodIntegration
+  # replace dev engineering workspace GUIDs
+  - find_value: 47c3cbed-97ab-4c60-92e4-7dc4bc572d65
+    replace_value:
+      DEV: $workspace.devEngineering
+      TEST: $workspace.testEngineering
+      PROD: $workspace.prodEngineering
+      
+
+  # replace dev Dataflow GUID of df_populate_testLH1_with_sourceLH1
+  - find_value: b043e334-6f96-4789-9718-c754fc68121d
+    replace_value:
+      DEV: $workspace.devIntegration.$items.Dataflow.df_populate_testLH1_with_sourceLH1.$id
+      TEST: $workspace.testIntegration.$items.Dataflow.df_populate_testLH1_with_sourceLH1.$id
+      PROD: $workspace.prodIntegration.$items.Dataflow.df_populate_testLH1_with_sourceLH1.$id
+
+  # replace dev Notebook GUID of nt_transform_sales_data_testLH1
+  - find_value: 161e5167-1fc9-4936-b4ee-6f86efecc510
+    replace_value:
+      DEV: $workspace.devEngineering.$items.Notebook.nt_transform_sales_data_testLH1.$id
+      TEST: $workspace.testEngineering.$items.Notebook.nt_transform_sales_data_testLH1.$id
+      PROD: $workspace.prodEngineering.$items.Notebook.nt_transform_sales_data_testLH1.$id
+
+  # replace dev Notebook GUID of nt_move_sales_city_from_testLH1_to_testLH2
+  - find_value: a39158fc-6adf-48aa-8254-a2b6cb8baef8
+    replace_value:
+      DEV: $workspace.devEngineering.$items.Notebook.nt_move_sales_city_from_testLH1_to_testLH2.$id
+      TEST: $workspace.testEngineering.$items.Notebook.nt_move_sales_city_from_testLH1_to_testLH2.$id
+      PROD: $workspace.prodEngineering.$items.Notebook.nt_move_sales_city_from_testLH1_to_testLH2.$id
+
+  # replace dev CopyJob GUID of cp_ciruits_from_mainLH1_to_testLH1
+  - find_value: b200e5eb-3536-49b2-b23a-300fed437298
+    replace_value:
+      DEV: $workspace.devIntegration.$items.Dataflow.cp_ciruits_from_mainLH1_to_testLH1.$id
+      TEST: $workspace.testIntegration.$items.Dataflow.cp_ciruits_from_mainLH1_to_testLH1.$id
+      PROD: $workspace.prodIntegration.$items.Dataflow.cp_ciruits_from_mainLH1_to_testLH1.$id
+
+  # replace dev Dataflow GUID of df_import_customers_from_mainLH1_to_testLH1
+  - find_value: e45258aa-85a3-45fd-901b-a3c59caf59d7
+    replace_value: 
+      DEV: $workspace.devIntegration.$items.Dataflow.df_import_customers_from_mainLH1_to_testLH1.$id
+      TEST: $workspace.testIntegration.$items.Dataflow.df_import_customers_from_mainLH1_to_testLH1.$id
+      PROD: $workspace.prodIntegration.$items.Dataflow.df_import_customers_from_mainLH1_to_testLH1.$id
