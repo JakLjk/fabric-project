@@ -40,15 +40,15 @@ jobs:
       - name: Install dependencies
         run: pip install fabric-cicd
 
-      - name: Azure login (service principal)
-        shell: pwsh
-        run: |
-          Install-Module -Name Az.Accounts -AllowClobber -Force -Scope CurrentUser
-          $sec = ConvertTo-SecureString "$env:AZURE_CLIENT_SECRET" -AsPlainText -Force
-          $creds = New-Object System.Management.Automation.PSCredential ($env:AZURE_CLIENT_ID, $sec)
-          Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant $env:AZURE_TENANT_ID
-          $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
-          Write-Host "Fabric token acquired"
+      # - name: Azure login (service principal)
+      #   shell: pwsh
+      #   run: |
+      #     Install-Module -Name Az.Accounts -AllowClobber -Force -Scope CurrentUser
+      #     $sec = ConvertTo-SecureString "$env:AZURE_CLIENT_SECRET" -AsPlainText -Force
+      #     $creds = New-Object System.Management.Automation.PSCredential ($env:AZURE_CLIENT_ID, $sec)
+      #     Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant $env:AZURE_TENANT_ID
+      #     $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
+      #     Write-Host "Fabric token acquired"
 
       - name: Deploy selected workspaces to TEST
         run: |
@@ -89,3 +89,6 @@ jobs:
         run: |
           echo "===== fabric_cicd.error.log ====="
           cat /home/runner/work/fabric-project/fabric-project/fabric_cicd.error.log
+
+      # - name: Run ApplyChanges to Deploy all Dataflows
+      #   shell: 
