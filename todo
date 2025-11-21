@@ -1,7 +1,4 @@
-copy job
 
-add data pipelines that launch the notebooks/dataflows/copy
-add schedules
 add semantic model
 add raport
 
@@ -11,7 +8,11 @@ add unit tests
 after publishing:
  - are correct lakehouses connected
 
-
 add integration tests
 
-automatic adding of users 
+
+deploying i.e. warehouse with speicified parameters using fabric cli 
+
+automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
+
+add schedules
