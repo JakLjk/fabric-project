@@ -37,9 +37,9 @@ find_replace:
   # replace dev CopyJob GUID of cp_ciruits_from_mainLH1_to_testLH1
   - find_value: b200e5eb-3536-49b2-b23a-300fed437298
     replace_value:
-      DEV: $workspace.devIntegration.$items.Dataflow.cp_ciruits_from_mainLH1_to_testLH1.$id
-      TEST: $workspace.testIntegration.$items.Dataflow.cp_ciruits_from_mainLH1_to_testLH1.$id
-      PROD: $workspace.prodIntegration.$items.Dataflow.cp_ciruits_from_mainLH1_to_testLH1.$id
+      DEV: $workspace.devIntegration.$items.CopyJob.cp_ciruits_from_mainLH1_to_testLH1.$id
+      TEST: $workspace.testIntegration.$items.CopyJob.cp_ciruits_from_mainLH1_to_testLH1.$id
+      PROD: $workspace.prodIntegration.$items.CopyJob.cp_ciruits_from_mainLH1_to_testLH1.$id
 
   # replace dev Dataflow GUID of df_import_customers_from_mainLH1_to_testLH1
   - find_value: e45258aa-85a3-45fd-901b-a3c59caf59d7
