@@ -47,7 +47,7 @@
         "type": "TridentNotebook",
         "dependsOn": [
           {
-            "activity": "Notebook1",
+            "activity": "Wait1",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -101,6 +101,21 @@
           "workspaceId": "be7d8849-dcdc-42f6-b61b-ab60499781bd",
           "notifyOption": "NoNotification",
           "dataflowType": "DataflowFabric"
+        }
+      },
+      {
+        "name": "Wait1",
+        "type": "Wait",
+        "dependsOn": [
+          {
+            "activity": "Notebook1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "typeProperties": {
+          "waitTimeInSeconds": 60
         }
       }
     ]
