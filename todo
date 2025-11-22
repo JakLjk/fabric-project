@@ -1,18 +1,19 @@
+auto run pipeline
 
 add semantic model
+
 add raport
 
-
 add unit tests
+
+deploying i.e. warehouse with speicified parameters using fabric cli 
+
+automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
 
 after publishing:
  - are correct lakehouses connected
 
 add integration tests
 
-
-deploying i.e. warehouse with speicified parameters using fabric cli 
-
-automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
 
 add schedules
