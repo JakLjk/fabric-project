@@ -38,7 +38,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install fabric-cicd azure-identity requests
+        run: pip install fabric-cicd azure-identity requests ms-fabric-cli
 
       # - name: Azure login (service principal)
       #   shell: pwsh
@@ -76,6 +76,13 @@ jobs:
                   --workspace-id "${{ vars.INTEGRATION_TEST_WS_ID }}" \
                   --environment TEST \
                   --repo-dir "./workspace/integration" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
+              orchestration)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.ORCHESTRATION_TEST_WS_ID }}" \
+                  --environment TEST \
+                  --repo-dir "./workspace/orchestration" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               *)
