@@ -38,7 +38,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install fabric-cicd azure-identity requests
+        run: pip install fabric-cicd azure-identity requests ms-fabric-cli
 
       # - name: Azure login (service principal)
       #   shell: pwsh
@@ -106,6 +106,10 @@ jobs:
             --client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" \
             --workspace-id "${{ vars.INTEGRATION_TEST_WS_ID }}" 
 
+
+      - name: Login to fabric CLI using Service Principal
+        run: |
+          fab auth -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Run pipeline responsible for hydrating storages with data.
         run: |
