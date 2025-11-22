@@ -96,7 +96,7 @@ df_sales_city = df_sales.alias("sales")\
 
 # CELL ********************
 
-df_sales_city.write.format("delta").saveAsTable("testLH1.transformed_sales_city")
+df_sales_city.write.format("delta").mode("overwrite").saveAsTable("testLH1.transformed_sales_city")
 
 # METADATA ********************
 

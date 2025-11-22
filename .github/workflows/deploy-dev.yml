@@ -18,7 +18,7 @@ env:
   AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
   AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-
+  
 
 jobs:
   deploy:
@@ -38,37 +38,37 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install fabric-cicd
+        run: pip install fabric-cicd azure-identity requests
 
-      - name: Azure login (service principal)
-        shell: pwsh
-        run: |
-          Install-Module -Name Az.Accounts -AllowClobber -Force -Scope CurrentUser
-          $sec = ConvertTo-SecureString "$env:AZURE_CLIENT_SECRET" -AsPlainText -Force
-          $creds = New-Object System.Management.Automation.PSCredential ($env:AZURE_CLIENT_ID, $sec)
-          Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant $env:AZURE_TENANT_ID
-          $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
-          Write-Host "Fabric token acquired"
+      # - name: Azure login (service principal)
+      #   shell: pwsh
+      #   run: |
+      #     Install-Module -Name Az.Accounts -AllowClobber -Force -Scope CurrentUser
+      #     $sec = ConvertTo-SecureString "$env:AZURE_CLIENT_SECRET" -AsPlainText -Force
+      #     $creds = New-Object System.Management.Automation.PSCredential ($env:AZURE_CLIENT_ID, $sec)
+      #     Connect-AzAccount -ServicePrincipal -Credential $creds -Tenant $env:AZURE_TENANT_ID
+      #     $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
+      #     Write-Host "Fabric token acquired"
 
       - name: Deploy selected workspaces to DEV
         run: |
-          IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'engineering,store,integration,orchestration,presentation,insights' }}"
-          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow,Warehouse' }}"
+          IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'store,engineering,integration,orchestration,presentation,insights' }}"
+          ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow,Warehouse,Environment' }}"
 
           for ws in "${WS_LIST[@]}"; do
             case "$ws" in
+                store)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.STORE_DEV_WS_ID }}" \
+                  --environment DEV \
+                  --repo-dir "./workspace/store" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
               engineering)
                 python .deploy/deploy.py \
                   --workspace-id "${{ vars.ENGINEERING_DEV_WS_ID }}" \
                   --environment DEV \
                   --repo-dir "./workspace/engineering" \
-                  --items-in-scope "$ITEMS_IN_SCOPE"
-                ;;
-              store)
-                python .deploy/deploy.py \
-                  --workspace-id "${{ vars.STORE_DEV_WS_ID }}" \
-                  --environment DEV \
-                  --repo-dir "./workspace/store" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               integration)
@@ -83,9 +83,18 @@ jobs:
                 ;;
             esac
           done
-          
+
       - name: Show Fabric CI/CD error log
         if: failure()          # or `always()` if you want it even on success
         run: |
           echo "===== fabric_cicd.error.log ====="
           cat /home/runner/work/fabric-project/fabric-project/fabric_cicd.error.log
+
+      - name: Run ApplyChanges to Deploy all Dataflows in integration workspace
+        shell: bash
+        run: |
+          python .deploy/applyChanges.py \
+            --tenant-id "${{ secrets.AZURE_TENANT_ID }}" \
+            --client-id "${{ secrets.AZURE_CLIENT_ID }}" \
+            --client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --workspace-id "${{ vars.INTEGRATION_DEV_WS_ID }}" 
