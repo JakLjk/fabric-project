@@ -110,9 +110,9 @@ jobs:
       - name: Login to fabric CLI using Service Principal
         run: |
           fab auth login \
-            -u ${{ secrets.AZURE_CLIENT_ID }} \
-            -p ${{ secrets.AZURE_CLIENT_SECRET }} \
-            --tenant ${{ secrets.AZURE_TENANT_ID }}
+            -u "${{ secrets.AZURE_CLIENT_ID }}" \
+            -p "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --tenant "${{ secrets.AZURE_TENANT_ID }}"
 
       - name: Run pipeline responsible for hydrating storages with data.
         run: |
