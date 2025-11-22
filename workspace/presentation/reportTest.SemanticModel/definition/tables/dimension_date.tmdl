@@ -1,0 +1,147 @@
+table dimension_date
+	lineageTag: f01038e2-190a-4ce3-83ac-02b77edb4954
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 5a80bb48-f434-4485-b399-5d349fedbce3
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayNumber
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 750308a6-09cc-4c3d-bd0b-30953c40d148
+		summarizeBy: none
+		sourceColumn: DayNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dad974ea-5131-433c-a6cb-45e3409f616d
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ade9c51a-2d46-491a-a4cf-64d894dfbda5
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShortMonth
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 9d62f0ab-bbe8-407a-adf4-b1cc1191a6b3
+		summarizeBy: none
+		sourceColumn: ShortMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarMonthNumber
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 659fb8ce-af43-4e9c-98f9-653f50937810
+		summarizeBy: none
+		sourceColumn: CalendarMonthNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarMonthLabel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 299db6ef-1f50-4bcf-ad11-284ea41b510c
+		summarizeBy: none
+		sourceColumn: CalendarMonthLabel
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarYear
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: aeb6617b-08ab-4150-9efb-6b1d21940912
+		summarizeBy: none
+		sourceColumn: CalendarYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column CalendarYearLabel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: be2b0413-f16a-46d0-bd09-ba9343076ef6
+		summarizeBy: none
+		sourceColumn: CalendarYearLabel
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalMonthNumber
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 898cb7b0-6cbe-4e9c-b024-d8aac2963f3d
+		summarizeBy: none
+		sourceColumn: FiscalMonthNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalMonthLabel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: dc95289f-844a-4862-8b1c-8ba5904dd73c
+		summarizeBy: none
+		sourceColumn: FiscalMonthLabel
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYear
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4f232f47-0058-4f7f-a5fa-283d522dce32
+		summarizeBy: none
+		sourceColumn: FiscalYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYearLabel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 142b3e9a-0b4f-4f70-a7ad-df98ff9ce510
+		summarizeBy: none
+		sourceColumn: FiscalYearLabel
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISOWeekNumber
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: db0b582a-a259-4e65-b5e1-1ee31a634509
+		summarizeBy: none
+		sourceColumn: ISOWeekNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimension_date = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("p3ldg654raaubokmsgkeuwfgua-s2pc4qloll4url7luaurpjmjmu.datawarehouse.fabric.microsoft.com", "testLH1"),
+				    dbo_dimension_date = Source{[Schema="dbo",Item="dimension_date"]}[Data]
+				in
+				    dbo_dimension_date
+
+	annotation PBI_ResultType = Table
+

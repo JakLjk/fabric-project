@@ -1,0 +1,153 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "37839498628aed2e156c",
+  "position": {
+    "x": 9.72644376899696,
+    "y": 0,
+    "z": 0,
+    "height": 719.75683890577511,
+    "width": 1270.2735562310031
+  },
+  "visual": {
+    "visualType": "hundredPercentStackedColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dimension_city"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "dimension_city.City",
+              "nativeQueryRef": "City",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dimension_stock_item"
+                    }
+                  },
+                  "Property": "Color"
+                }
+              },
+              "queryRef": "dimension_stock_item.Color",
+              "nativeQueryRef": "Color"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "fact_sale"
+                        }
+                      },
+                      "Property": "Profit"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(fact_sale.Profit)",
+              "nativeQueryRef": "Sum of Profit"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "fact_sale"
+                      }
+                    },
+                    "Property": "Profit"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "8b11d5a84901d7984ae5",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_sale"
+                  }
+                },
+                "Property": "Profit"
+              }
+            },
+            "Function": 0
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e6742df997bb942aca62",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dimension_city"
+              }
+            },
+            "Property": "City"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a0fe048eb03860405a2d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dimension_stock_item"
+              }
+            },
+            "Property": "Color"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}
