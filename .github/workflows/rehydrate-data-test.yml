@@ -1,0 +1,34 @@
+name: Rehydrate Data - TEST
+
+on: workflow_dispatch
+
+
+env:
+  AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install ms-fabric-cli
+
+      - name: Login to fabric CLI using Service Principal
+        run: |
+          fab config set encryption_fallback_enabled true
+          
+          fab auth login \
+            -u "${{ secrets.AZURE_CLIENT_ID }}" \
+            -p "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --tenant "${{ secrets.AZURE_TENANT_ID }}"
+
+      - name: Run pipeline responsible for hydrating storages with data.
+        run: |
+          fab job run testOrchestration.Workspace/pip_orchestrateDataRefresh.DataPipeline
