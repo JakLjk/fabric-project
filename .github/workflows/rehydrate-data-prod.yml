@@ -12,7 +12,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: main
+
   steps:
+    - name: Checkout prod/main branch
+      uses: actions/checkout@v4
+      with:
+        ref: main
+        
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
