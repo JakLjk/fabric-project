@@ -7,16 +7,15 @@ add raport
 read about tests post/pre deployment here:
 https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Git-based-deployments
 
-add unit tests
+- linting
+- unit tests
+- integration tests
+     - are correct lakehouses connected
+- deployment dry-run
+- smoke tests
 
 deploying i.e. warehouse with speicified parameters using fabric cli 
 
 automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
-
-after publishing:
- - are correct lakehouses connected
-
-add integration tests
-
 
 add schedules
