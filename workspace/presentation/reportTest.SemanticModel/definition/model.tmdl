@@ -1,0 +1,22 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["fact_sale","dimension_stock_item","dimension_date","dimension_customer","dimension_city"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_sale
+ref table dimension_stock_item
+ref table dimension_date
+ref table dimension_customer
+ref table dimension_city
+
+ref cultureInfo en-US
+
