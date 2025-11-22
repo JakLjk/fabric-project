@@ -85,6 +85,13 @@ jobs:
                   --repo-dir "./workspace/orchestration" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
+              presentation)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.PRESENTATION_TEST_WS_ID }}" \
+                  --environment TEST \
+                  --repo-dir "./workspace/presentation" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;                
               *)
                 echo "Unknown workspace: $ws"
                 ;;
