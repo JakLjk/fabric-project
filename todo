@@ -13,3 +13,7 @@ deploying i.e. warehouse with speicified parameters using fabric cli
 automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
 
 add schedules
+
+fabric cicd config deployment - do alternativ eapporach using this
+
+https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Branch-out-to-new-workspace
