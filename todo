@@ -4,6 +4,9 @@ add semantic model
 
 add raport
 
+read about tests post/pre deployment here:
+https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Git-based-deployments
+
 add unit tests
 
 deploying i.e. warehouse with speicified parameters using fabric cli 
