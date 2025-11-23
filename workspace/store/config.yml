@@ -25,7 +25,6 @@ core:
 features:
     - enable_experimental_features
     - enable_config_deploy
-    - enable_shortcut_publish
     - enable_items_to_include
 
 constants:
