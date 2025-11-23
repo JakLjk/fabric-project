@@ -1,0 +1,21 @@
+workspace_roles:
+  DEV:
+    devStore:
+      - identity: "3f2a6148-dff7-4a6b-a1a6-a7b9762341f6" # testeusz@lejk.uk
+        role: "admin"
+      - identity: "b69544e2-940b-4ce6-951f-87c038e86811" # fabric main SG
+        role: "contributor"
+  
+  TEST:
+    testStore:
+      - identity: "3f2a6148-dff7-4a6b-a1a6-a7b9762341f6" # testeusz@lejk.uk
+        role: "admin"
+      - identity: "b69544e2-940b-4ce6-951f-87c038e86811" # fabric main SG
+        role: "contributor"
+    
+  PROD:
+    prodStore:
+      - identity: "3f2a6148-dff7-4a6b-a1a6-a7b9762341f6" # testeusz@lejk.uk
+        role: "admin"
+      - identity: "b69544e2-940b-4ce6-951f-87c038e86811" # fabric main SG
+        role: "contributor"
