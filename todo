@@ -1,21 +1,23 @@
-auto run pipeline
+- fabric cicd configuration apporach
 
-add semantic model
+- RBAC
 
-add raport
+- tests
 
-read about tests post/pre deployment here:
-https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Git-based-deployments
 
-- linting
-- unit tests
-- integration tests
-     - are correct lakehouses connected
-- deployment dry-run
-- smoke tests
+
+
+
+- tests in github ci
+
+- separate workspace with tests
 
 deploying i.e. warehouse with speicified parameters using fabric cli 
 
 automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
 
 add schedules
+
+fabric cicd config deployment - do alternativ eapporach using this
+
+https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Branch-out-to-new-workspace

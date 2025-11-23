@@ -1,0 +1,16 @@
+relationship 23b2d59a-e1c8-aba2-4682-f284812b84c1
+	fromColumn: fact_sale.CityKey
+	toColumn: dimension_city.CityKey
+
+relationship f61825f4-31b2-2c14-359e-b7de43b77786
+	fromColumn: fact_sale.CustomerKey
+	toColumn: dimension_customer.CustomerKey
+
+relationship 15251f4c-019c-9dd4-42ab-bdfc7ca064f2
+	fromColumn: fact_sale.StockItemKey
+	toColumn: dimension_stock_item.StockItemKey
+
+relationship bde53f3c-14c7-af63-53c9-69c7060f04c0
+	fromColumn: fact_sale.DeliveryDateKey
+	toColumn: dimension_date.Date
+

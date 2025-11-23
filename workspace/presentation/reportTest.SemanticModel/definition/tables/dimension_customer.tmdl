@@ -1,0 +1,118 @@
+table dimension_customer
+	lineageTag: b20d3590-8344-4b6f-baf8-d95f131c3f24
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: acaa8e42-3ad6-4870-a3f9-1be1eef242c5
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column WWICustomerID
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: bd39c8f1-1f5a-4c25-a7e6-83c1e78da614
+		summarizeBy: none
+		sourceColumn: WWICustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d5a08d71-fc65-40c7-b40c-ee2c879a66af
+		summarizeBy: none
+		sourceColumn: Customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column BillToCustomer
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3077a2d5-e19b-4291-8fe7-c60b74051689
+		summarizeBy: none
+		sourceColumn: BillToCustomer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3d21663a-15e4-4ae9-9f22-4cdc119bc0fd
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column BuyingGroup
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: b8d24ed6-d59d-4d02-aaeb-302beaf23025
+		summarizeBy: none
+		sourceColumn: BuyingGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrimaryContact
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 87372185-f785-447c-9521-8163f9139d65
+		summarizeBy: none
+		sourceColumn: PrimaryContact
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostalCode
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 20bcb6b5-a28d-4de4-bf7f-ded05666e589
+		summarizeBy: none
+		sourceColumn: PostalCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValidFrom
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 9e766f08-2613-4ad1-8d16-de118143af94
+		summarizeBy: none
+		sourceColumn: ValidFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValidTo
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 3b82c788-ae20-4e13-8834-48327ff6f453
+		summarizeBy: none
+		sourceColumn: ValidTo
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineageKey
+		dataType: int64
+		formatString: 0
+		sourceProviderType: bigint
+		lineageTag: 0c7a5bec-f170-4b9d-b549-cf7cd08f49a9
+		summarizeBy: none
+		sourceColumn: LineageKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dimension_customer = m
+		mode: directQuery
+		source =
+				let
+				    Source = Sql.Database("p3ldg654raaubokmsgkeuwfgua-s2pc4qloll4url7luaurpjmjmu.datawarehouse.fabric.microsoft.com", "testLH1"),
+				    dbo_dimension_customer = Source{[Schema="dbo",Item="dimension_customer"]}[Data]
+				in
+				    dbo_dimension_customer
+
+	annotation PBI_ResultType = Table
+

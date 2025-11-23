@@ -1,8 +1,8 @@
-name: Deploy to DEV
+name: Deploy to PROD/MAIN
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
   # workflow_dispatch:
   #   inputs:
   #     workspaces:
@@ -24,13 +24,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     # Optional: use GitHub Environments for approvals
-    environment: dev
+    environment: main
 
     steps:
-      - name: Checkout dev branch
+      - name: Checkout prod/main branch
         uses: actions/checkout@v4
         with:
-          ref: dev
+          ref: main
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -38,7 +38,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install fabric-cicd azure-identity requests
+        run: pip install fabric-cicd azure-identity requests ms-fabric-cli
 
       # - name: Azure login (service principal)
       #   shell: pwsh
@@ -50,34 +50,47 @@ jobs:
       #     $token = (Get-AzAccessToken -ResourceUrl "https://api.fabric.microsoft.com").Token
       #     Write-Host "Fabric token acquired"
 
-      - name: Deploy selected workspaces to DEV
+      - name: Deploy selected workspaces to PROD
         run: |
           IFS=',' read -ra WS_LIST <<< "${{ github.event.inputs.workspaces || 'store,engineering,integration,orchestration,presentation,insights' }}"
           ITEMS_IN_SCOPE="${{ github.event.inputs.items_in_scope || 'Lakehouse,Notebook,DataPipeline,SemanticModel,Report,CopyJob,Dataflow,Warehouse,Environment' }}"
-
           for ws in "${WS_LIST[@]}"; do
             case "$ws" in
-                store)
-                python .deploy/deploy.py \
-                  --workspace-id "${{ vars.STORE_DEV_WS_ID }}" \
-                  --environment DEV \
-                  --repo-dir "./workspace/store" \
-                  --items-in-scope "$ITEMS_IN_SCOPE"
-                ;;
               engineering)
                 python .deploy/deploy.py \
-                  --workspace-id "${{ vars.ENGINEERING_DEV_WS_ID }}" \
-                  --environment DEV \
+                  --workspace-id "${{ vars.ENGINEERING_PROD_WS_ID }}" \
+                  --environment PROD \
                   --repo-dir "./workspace/engineering" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
+              store)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.STORE_PROD_WS_ID }}" \
+                  --environment PROD \
+                  --repo-dir "./workspace/store" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
               integration)
                 python .deploy/deploy.py \
-                  --workspace-id "${{ vars.INTEGRATION_DEV_WS_ID }}" \
-                  --environment DEV \
+                  --workspace-id "${{ vars.INTEGRATION_PROD_WS_ID }}" \
+                  --environment PROD \
                   --repo-dir "./workspace/integration" \
                   --items-in-scope "$ITEMS_IN_SCOPE"
                 ;;
+              orchestration)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.ORCHESTRATION_PROD_WS_ID }}" \
+                  --environment PROD \
+                  --repo-dir "./workspace/orchestration" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;
+              presentation)
+                python .deploy/deploy.py \
+                  --workspace-id "${{ vars.PRESENTATION_PROD_WS_ID }}" \
+                  --environment PROD \
+                  --repo-dir "./workspace/presentation" \
+                  --items-in-scope "$ITEMS_IN_SCOPE"
+                ;;                
               *)
                 echo "Unknown workspace: $ws"
                 ;;
@@ -90,11 +103,11 @@ jobs:
           echo "===== fabric_cicd.error.log ====="
           cat /home/runner/work/fabric-project/fabric-project/fabric_cicd.error.log
 
-      - name: Run ApplyChanges to Deploy all Dataflows in integration workspace
+      - name: Run ApplyChanges to Deploy all Dataflows in prod integration workspace
         shell: bash
         run: |
           python .deploy/applyChanges.py \
             --tenant-id "${{ secrets.AZURE_TENANT_ID }}" \
             --client-id "${{ secrets.AZURE_CLIENT_ID }}" \
             --client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" \
-            --workspace-id "${{ vars.INTEGRATION_DEV_WS_ID }}" 
+            --workspace-id "${{ vars.INTEGRATION_PROD_WS_ID }}" 

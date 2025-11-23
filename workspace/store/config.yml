@@ -1,0 +1,31 @@
+core:
+  workspace:
+    DEV: "devStore"
+    TEST: "testStore"
+    PROD: "prodStore"
+
+  workspace_id:
+    DEV: "412e9e96-5a6e-48f9-afeb-a02917a58965"
+    TEST: "0f435657-dacd-4104-8703-db63cd7a3905"
+    PROD: "8491bbb6-30f9-4cb4-87f9-98e8eb41b57c"
+
+  repository_directory: "."
+
+  item_types_in_scope:
+    - Lakehouse
+    - Notebook
+    - DataPipeline
+    - SemanticModel
+    - Report
+    - CopyJob
+    - Dataflow
+    - Warehouse
+    - Environment
+
+features:
+    - enable_experimental_features
+    - enable_config_deploy
+    - enable_items_to_include
+
+constants:
+    DEFAULT_API_ROOT_URL: "https://api.fabric.microsoft.com"
