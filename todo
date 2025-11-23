@@ -1,6 +1,4 @@
-
 - tests
-
     - from chatgpt
     - unit tests in github
     - separate workspace with tests
@@ -9,3 +7,14 @@
 - schedules
 
 https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Branch-out-to-new-workspace
+
+
+
+
+You can split tests roughly into three layers:
+
+Static tests: config, regex rules, Python code (no Fabric calls).
+
+Deployment tests: does the deployment pipeline behave correctly?
+
+Post-deployment tests: do the deployed artifacts and data behave correctly?
