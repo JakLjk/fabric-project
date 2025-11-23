@@ -1,0 +1,69 @@
+name: Deploy to DEV Fabric Workspaces
+
+on:
+  push:
+    branches: [ dev ]
+
+env:
+  AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+  FABRIC_ENVIRONMENT: dev
+  INTEGRATION_WORKSPACE_ID: ${{ vars.INTEGRATION_DEV_WS_ID }}
+
+  WORKSPACES_IN_ORDER: "store integration engineering orchestration presentation"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+    - name: Checkout dev branch
+      uses: actions/checkout@v4
+      with:
+        ref: dev
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install Dependencies via Poetry
+      run: |
+        poetry install --no-interaction --no-root
+
+    - name: Run deployment in dependency order
+      run: |
+        set -e  # stop on first failure
+
+        for ws in $WORKSPACES_IN_ORDER; do
+          echo "======================================"
+          echo "Deploying workspace: $ws"
+          echo "Environment:         $FABRIC_ENVIRONMENT"
+          echo "======================================"
+
+          poetry run python .deploy/deploy_workspace_items.py \
+            --environment "$FABRIC_ENVIRONMENT" \
+            --workspace "$ws"
+        done
+        
+    - name: Show Fabric CI/CD error log
+      if: always()
+      run: |
+        echo "===== fabric_cicd.error.log ====="
+        cat fabric_cicd.error.log || echo "No fabric_cicd.error.log found"
+
+    - name: Run ApplyChanges to deploy all Dataflows in integration workspace
+      run: |
+        poetry run python .deploy/apply_changes_to_data_pipelines.py \
+          --tenant-id   "$AZURE_TENANT_ID" \
+          --client-id   "$AZURE_CLIENT_ID" \
+          --client-secret "$AZURE_CLIENT_SECRET" \
+          --workspace-id "$INTEGRATION_WORKSPACE_ID"
