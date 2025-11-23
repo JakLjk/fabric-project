@@ -2,7 +2,7 @@ find_replace:
   # Replace default sqlendpoint of DEV Lakehouse testLH1
   - find_value: "p3ldg654raaubokmsgkeuwfgua-s2pc4qloll4url7luaurpjmjmu.datawarehouse.fabric.microsoft.com"
     replace_value:
-      DEV: $workspace.devPresentation.$items.Lakehouse.testLH1.$sqlendpoint
-      TEST: $workspace.testPresentation.$items.Lakehouse.testLH1.$sqlendpoint
-      PROD: $workspace.prodOrchestration.$items.Lakehouse.testLH1.$sqlendpoint
-    file_path: reportTest.SemanticModel/definition/tables
+      DEV: $workspace.devStore.$items.Lakehouse.testLH1.$sqlendpoint
+      TEST: $workspace.testStore.$items.Lakehouse.testLH1.$sqlendpoint
+      PROD: $workspace.prodStore.$items.Lakehouse.testLH1.$sqlendpoint
+    file_path: reportTest.SemanticModel/definition/tables/*.tmdl
