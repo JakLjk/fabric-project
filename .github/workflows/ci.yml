@@ -40,6 +40,6 @@ jobs:
       run: |
         for f in $(find . -name "*.json"); do
           echo "Checking $f"
-          jsonlint -q "$f"
+          python -m json.tool "$f" > /dev/null
         done
 
