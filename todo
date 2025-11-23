@@ -1,23 +1,20 @@
-- fabric cicd configuration apporach
-
-- RBAC
-
 - tests
+    - from chatgpt
+    - unit tests in github
+    - separate workspace with tests
 
-
-
-
-
-- tests in github ci
-
-- separate workspace with tests
-
-deploying i.e. warehouse with speicified parameters using fabric cli 
-
-automatic adding of users (przypisz mi takie osoby z takimi uprawnieniami)
-
-add schedules
-
-fabric cicd config deployment - do alternativ eapporach using this
+- changing and creating connections
+- schedules
 
 https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Branch-out-to-new-workspace
+
+
+
+
+You can split tests roughly into three layers:
+
+Static tests: config, regex rules, Python code (no Fabric calls).
+
+Deployment tests: does the deployment pipeline behave correctly?
+
+Post-deployment tests: do the deployed artifacts and data behave correctly?

@@ -1,0 +1,47 @@
+extends: default
+
+rules:
+  document-start:
+    present: false
+
+  new-lines: disable
+
+  truthy:
+    level: warning
+
+  line-length:
+    max: 200
+    level: warning
+
+  # Indentation can actually break YAML, keep it but not super strict
+  indentation:
+    indent-sequences: consistent
+    level: warning
+
+  # Cosmetic rules → warnings instead of errors
+  trailing-spaces:
+    level: warning
+
+  empty-lines:
+    max: 2
+    level: warning
+
+  new-line-at-end-of-file:
+    level: warning
+
+  comments-indentation:
+    level: warning
+
+  brackets:
+    level: warning
+
+  colons:
+    level: warning
+
+  # Real structural problem → keep as error
+  key-duplicates:
+    level: error
+
+ignore: |
+  .venv/
+  _legacy/

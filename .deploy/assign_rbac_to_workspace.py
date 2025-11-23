@@ -133,8 +133,7 @@ def apply_workspace_rbac_for_env(config: Dict[str, Any], environment:str, header
             existing_entity_role = existing_entity.get("role")
             existing_entity_principal = existing_entity.get("principal")
             existing_entity_identity = existing_entity_principal.get("id")
-            existing_entity_type = existing_entity_principal.get("type")
-            
+                        
             if existing_entity_role == new_entity_role:
                 print(f"  - {existing_entity_identity} already has role '{existing_entity_role}' → skipping")
                 continue
