@@ -8,3 +8,21 @@ core:
     DEV: "be7d8849-dcdc-42f6-b61b-ab60499781bd"
     TEST: "ddf9ac65-8f3b-4b06-a28e-019c5a6914da"
     PROD: "3e574a57-672a-4a02-9bdc-c91131e47385'
+
+  repository_directory: "."
+
+  item_types_in_scope:
+    - Lakehouse
+    - Notebook
+    - DataPipeline
+    - SemanticModel
+    - Report
+    - CopyJob
+    - Dataflow
+    - Warehouse
+    - Environment
+  
+  parameter: "parameter.yml"
+
+constants:
+    DEFAULT_API_ROOT_URL: "https://api.fabric.microsoft.com"

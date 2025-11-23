@@ -21,8 +21,6 @@ core:
     - Dataflow
     - Warehouse
     - Environment
-  
-  parameter: "parameter.yml"
 
 constants:
     DEFAULT_API_ROOT_URL: "https://api.fabric.microsoft.com"
