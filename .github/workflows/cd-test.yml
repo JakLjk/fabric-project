@@ -8,16 +8,16 @@ env:
   AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
   AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-  
+
+  FABRIC_ENVIRONMENT: test
+  INTEGRATION_WORKSPACE_ID: ${{ vars.INTEGRATION_TEST_WS_ID }}
+
+  WORKSPACES_IN_ORDER: "store integration engineering orchestration presentation"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Optional: use GitHub Environments for approvals
     environment: test
-
-    env:
-      FABRIC_ENVIRONMENT: test
-      INTEGRATION_WORKSPACE_ID: ${{ vars.INTEGRATION_TEST_WS_ID }}
 
     steps:
     - name: Checkout test branch
@@ -28,12 +28,7 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.11"
-
-    - name: Setup Poetry
-
-      run: |
-        curl -sSL https://install.python-poetry.org | python3 -
+        python-version: "3.12"
 
     - name: Install Poetry
       run: |
@@ -44,39 +39,31 @@ jobs:
       run: |
         poetry install --no-interaction --no-root
 
-    - name: Run Deployment
+    - name: Run deployment in dependency order
       run: |
-        poetry run python .deploy/deploy_workspace_items.py \
-          --environment ${{ env.FABRIC_ENVIRONMENT }} \
-          --workspace store
+        set -e  # stop on first failure
 
-        poetry run python .deploy/deploy_workspace_items.py \
-          --environment ${{ env.FABRIC_ENVIRONMENT }} \
-          --workspace integration
+        for ws in $WORKSPACES_IN_ORDER; do
+          echo "======================================"
+          echo "Deploying workspace: $ws"
+          echo "Environment:         $FABRIC_ENVIRONMENT"
+          echo "======================================"
 
-        poetry run python .deploy/deploy_workspace_items.py \
-          --environment ${{ env.FABRIC_ENVIRONMENT }} \
-          --workspace engineering
-
-        poetry run python .deploy/deploy_workspace_items.py \
-          --environment ${{ env.FABRIC_ENVIRONMENT }} \
-          --workspace orchestration
-    
-        poetry run python .deploy/deploy_workspace_items.py \
-          --environment ${{ env.FABRIC_ENVIRONMENT }} \
-          --workspace presentation
-
+          poetry run python .deploy/deploy_workspace_items.py \
+            --environment "$FABRIC_ENVIRONMENT" \
+            --workspace "$ws"
+        done
+        
     - name: Show Fabric CI/CD error log
       if: always()
       run: |
         echo "===== fabric_cicd.error.log ====="
-        cat /home/runner/work/fabric-project/fabric-project/fabric_cicd.error.log
+        cat fabric_cicd.error.log || echo "No fabric_cicd.error.log found"
 
-    - name: Run ApplyChanges to Deploy all Dataflows in integration workspace
-      shell: bash
+    - name: Run ApplyChanges to deploy all Dataflows in integration workspace
       run: |
-        python .deploy/apply_changes_to_data_pipelines.py \
-          --tenant-id "${{ secrets.AZURE_TENANT_ID }}" \
-          --client-id "${{ secrets.AZURE_CLIENT_ID }}" \
-          --client-secret "${{ secrets.AZURE_CLIENT_SECRET }}" \
-          --workspace-id "${{ env.INTEGRATION_WORKSPACE_ID }}" 
+        poetry run python .deploy/apply_changes_to_data_pipelines.py \
+          --tenant-id   "$AZURE_TENANT_ID" \
+          --client-id   "$AZURE_CLIENT_ID" \
+          --client-secret "$AZURE_CLIENT_SECRET" \
+          --workspace-id "$INTEGRATION_WORKSPACE_ID"
