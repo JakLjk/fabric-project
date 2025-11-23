@@ -1,0 +1,34 @@
+core:
+  workspace:
+    DEV: "devOrchestration"
+    TEST: "testOrchestration"
+    PROD: "prodOrchestration"
+
+  workspace_id:
+    DEV: "4bcb22ef-8c9c-436a-bf51-5d9a6fc01005"
+    TEST: "30eece15-47f4-46e3-b802-7b465a0071e8"
+    PROD: "539f9ce8-6c99-4215-be67-bcf22cc10b42"
+
+  repository_directory: "."
+
+  item_types_in_scope:
+    - Lakehouse
+    - Notebook
+    - DataPipeline
+    - SemanticModel
+    - Report
+    - CopyJob
+    - Dataflow
+    - Warehouse
+    - Environment
+  
+  parameter: "parameter.yml"
+
+features:
+    - enable_experimental_features
+    - enable_config_deploy
+    - enable_shortcut_publish
+    - enable_items_to_include
+
+constants:
+    DEFAULT_API_ROOT_URL: "https://api.fabric.microsoft.com"
