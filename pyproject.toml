@@ -3,20 +3,67 @@ name = "fabric-project"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "JakLjk",email = "lejk99@icloud.com"}
+    {name = "JakLjk", email = "lejk99@icloud.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "fabric-cicd (>=0.1.30,<0.2.0)",
-    "pytest (>=9.0.1,<10.0.0)",
-    "ruff (>=0.14.6,<0.15.0)",
     "python-dotenv (>=1.2.1,<2.0.0)",
     "azure-identity (>=1.25.1,<2.0.0)",
     "requests (>=2.32.5,<3.0.0)"
 ]
 
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=9.0.1,<10.0.0"
+ruff = ">=0.14.6,<0.15.0"
+yamllint = ">=1.37.1,<2.0.0"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.ruff]
+# Target Python version and general settings
+target-version = "py312"
+line-length = 120
+src = ["."]
+exclude = [
+    ".venv",
+    ".git",
+    ".github",
+]
+
+[tool.ruff.lint]
+# Enable core error/bug checks and flake8-bugbear
+# E4/E7/E9 = syntax/logic errors
+# F = pyflakes (unused vars, imports, etc.)
+# B = flake8-bugbear (common bug patterns)
+select = ["E4", "E7", "E9", "F", "B"]
+
+# Don't complain about line length (E501)
+ignore = ["E501"]
+
+# Don't auto-fix bugbear (`B`) rules
+unfixable = ["B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Allow non-top-level imports in __init__.py
+"__init__.py" = ["E402"]
+
+# Ignore notebook-specific issues in Fabric-exported Python:
+# - E402: imports not at top of file
+# - F401: unused imports (e.g., pyspark functions)
+# - F821: undefined names (spark, display injected by Fabric)
+"workspace/**/notebook-content.py" = ["E402", "F401", "F821"]
+
+[tool.ruff.format]
+# Formatting preferences if you use `ruff format`
+quote-style = "single"
+indent-style = "space"
+line-ending = "lf"

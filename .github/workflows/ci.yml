@@ -1,0 +1,45 @@
+name: Initial Unit Tests and Linting
+
+on:
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  lint-and-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: 2.2.1
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Install dependencies
+      run: |
+        poetry install --no-interaction --no-root --with test
+
+    - name: Run linting for python files
+      continue-on-error: true
+      run: |
+        poetry run ruff check .
+
+    - name: Run linting for YAML files
+      continue-on-error: true
+      run: |
+        poetry run yamllint .
+      
+    - name: Run linting for JSON files
+      continue-on-error: true
+      run: |
+        for f in $(find . -name "*.json"); do
+          echo "Checking $f"
+          python -m json.tool "$f" > /dev/null
+        done
+
