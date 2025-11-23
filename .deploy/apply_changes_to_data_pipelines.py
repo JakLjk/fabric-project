@@ -25,7 +25,7 @@ def get_all_dataflow_data(access_token:str, workspace_id:str):
     url = f"{BASE_URL}/workspaces/{workspace_id}/dataflows"
     headers = {
         "Authorization": f"Bearer {access_token}",
-        "Accept": f"application/json",
+        "Accept": "application/json",
     }
     dataflows = []
     continuation = None
@@ -50,7 +50,7 @@ def run_apply_changes(access_token, workspace_id, dataflow_id):
     url = f"{BASE_URL}/workspaces/{workspace_id}/dataflows/{dataflow_id}/jobs/ApplyChanges/instances"
     headers = {
         "Authorization": f"Bearer {access_token}",
-        "Accept": f"application/json",
+        "Accept": "application/json",
     }
     resp = requests.post(url=url, headers=headers)
     if resp.status_code != 202:

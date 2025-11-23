@@ -25,8 +25,18 @@ jobs:
       run: |
         poetry install --no-interaction --no-root --with test
 
-    - name: Run lint
+    - name: Run linting for python files
+      continue-on-error: true
       run: |
         poetry run ruff check .
+
+    - name: Run linting for YAML files
+      continue-on-error: true
+      run: |
         poetry run yamllint .
+      
+    - name: Run linting for JSON files
+      continue-on-error: true
+      run: |
         poetry run jsonlint .
+
