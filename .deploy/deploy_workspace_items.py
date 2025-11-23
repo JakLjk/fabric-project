@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 import os
 
-print("\n==========================================================")
+
 
 root = Path(__file__).resolve().parents[1]
 
@@ -16,10 +16,13 @@ args = parser.parse_args()
 tenant_id = os.getenv("AZURE_TENANT_ID")
 client_id = os.getenv("AZURE_CLIENT_ID")
 client_secret = os.getenv("AZURE_CLIENT_SECRET")
+
 print(
+    f"======================================="
     f"Deploying items using fabric CICD module"
     f"Environment: {args.environment}"
-    f"Workspace: {args.workspace}")
+    f"Workspace: {args.workspace}"
+    f"=======================================")
 
 print("Getting credentials")
 credential = ClientSecretCredential(

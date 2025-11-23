@@ -1,0 +1,74 @@
+{
+    "DEV": {
+        "workspace_id": "47c3cbed-97ab-4c60-92e4-7dc4bc572d65",
+        "workspace_name": "devEngineering",
+        "workspace_permission_entities":[
+            {
+            "name": "testeusz@lejk.uk",
+            "identity": "3f2a6148-dff7-4a6b-a1a6-a7b9762341f6",
+            "type": "User",
+            "role": "Admin"
+            },
+            {
+            "name": "fabric-security-group",
+            "identity": "99bfc2ce-442f-4019-aef1-01868e26800a",
+            "type": "Group",
+            "role": "Admin"
+            },
+            {
+            "name":"fabric-member-group-default",
+            "identity": "3a12d66a-54e1-4cc9-b9b1-149e21a62664",
+            "type": "Group",
+            "role": "Member"
+            }
+        ]
+    },
+    "TEST": {
+        "workspace_id": "36195163-dce6-4fcf-8170-e17299ac849e",
+        "workspace_name": "testEngineering",
+        "workspace_permission_entities":[
+            {
+            "name": "testeusz@lejk.uk",
+            "identity": "3f2a6148-dff7-4a6b-a1a6-a7b9762341f6",
+            "type": "User",
+            "role": "Admin"
+            },
+            {
+            "name": "fabric-security-group",
+            "identity": "99bfc2ce-442f-4019-aef1-01868e26800a",
+            "type": "Group",
+            "role": "Admin"
+            },
+            {
+            "name":"fabric-member-group-default",
+            "identity": "3a12d66a-54e1-4cc9-b9b1-149e21a62664",
+            "type": "Group",
+            "role": "Member"
+            }
+        ]
+    },
+    "PROD": {
+        "workspace_id": "1f44944e-ccf0-47f3-8c78-652e78deec91",
+        "workspace_name": "prodEngineering",
+        "workspace_permission_entities":[
+            {
+            "name": "testeusz@lejk.uk",
+            "identity": "3f2a6148-dff7-4a6b-a1a6-a7b9762341f6",
+            "type": "User",
+            "role": "Admin"
+            },
+            {
+            "name": "fabric-security-group",
+            "identity": "99bfc2ce-442f-4019-aef1-01868e26800a",
+            "type": "Group",
+            "role": "Admin"
+            },
+            {
+            "name":"fabric-member-group-default",
+            "identity": "3a12d66a-54e1-4cc9-b9b1-149e21a62664",
+            "type": "Group",
+            "role": "Member"
+            }
+        ]
+    }        
+}
