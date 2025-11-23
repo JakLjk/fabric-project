@@ -1,0 +1,10 @@
+core:
+  workspace:
+    DEV: "devIntegration"
+    TEST: "testIntegration"
+    PROD: "prodIntegration"
+
+  workspace_id:
+    DEV: "be7d8849-dcdc-42f6-b61b-ab60499781bd"
+    TEST: "ddf9ac65-8f3b-4b06-a28e-019c5a6914da"
+    PROD: "3e574a57-672a-4a02-9bdc-c91131e47385'

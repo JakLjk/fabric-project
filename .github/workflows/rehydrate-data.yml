@@ -1,0 +1,66 @@
+name: Rehydrate Data
+on: 
+  workflow_dispatch:
+    inputs:
+    environment:
+      description: "Environment to run against"
+      required: true
+      type: choice
+      options:
+        - dev
+        - test
+        - prod
+
+
+
+env:
+  AZURE_TENANT_ID:   ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_ID:   ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install ms-fabric-cli
+
+      - name: Determine pipeline for selected environment
+        id: pipeline
+        run: |
+          case "${{ inputs.environment }}" in
+            dev)
+              PIPELINE="devOrchestration.Workspace/pip_orchestrateDataRefresh.DataPipeline"
+              ;;
+            test)
+              PIPELINE="testOrchestration.Workspace/pip_orchestrateDataRefresh.DataPipeline"
+              ;;
+            prod)
+              PIPELINE="prodOrchestration.Workspace/pip_orchestrateDataRefresh.DataPipeline"
+              ;;
+            *)
+              echo "Unknown environment: ${{ inputs.environment }}"
+              exit 1
+              ;;
+          esac
+
+          echo "pipeline=$PIPELINE" >> "$GITHUB_OUTPUT"
+
+      - name: Login to fabric CLI using Service Principal
+        run: |
+          fab config set encryption_fallback_enabled true
+          
+          fab auth login \
+            -u "${{ secrets.AZURE_CLIENT_ID }}" \
+            -p "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --tenant "${{ secrets.AZURE_TENANT_ID }}"
+
+      - name: Run pipeline responsible for hydrating storages with data.
+        run: |
+          fab job run ${{ steps.pipeline.outputs.pipeline }}

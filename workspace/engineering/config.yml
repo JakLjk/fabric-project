@@ -1,0 +1,10 @@
+core:
+  workspace:
+    DEV: "devEngineering"
+    TEST: "testEngineering"
+    PROD: "prodEngineering"
+
+  workspace_id:
+    DEV: "47c3cbed-97ab-4c60-92e4-7dc4bc572d65"
+    TEST: "36195163-dce6-4fcf-8170-e17299ac849e"
+    PROD: "1f44944e-ccf0-47f3-8c78-652e78deec91"

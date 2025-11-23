@@ -1,12 +1,13 @@
-read about tests post/pre deployment here:
-https://github.com/microsoft/fabric-toolbox/tree/main/accelerators/CICD/Git-based-deployments
+- RBAC
 
-- linting
-- unit tests
-- integration tests
-     - are correct lakehouses connected
-- deployment dry-run
-- smoke tests
+
+
+
+
+
+- tests in github ci
+
+- separate workspace with tests
 
 deploying i.e. warehouse with speicified parameters using fabric cli 
 
