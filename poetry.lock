@@ -435,21 +435,6 @@ files = [
 ]
 
 [[package]]
-name = "jsonlint"
-version = "0.1"
-description = "A flexible json validation for python web development."
-optional = false
-python-versions = "*"
-groups = ["test"]
-files = [
-    {file = "jsonlint-0.1-py2.py3-none-any.whl", hash = "sha256:56f4e49ecb1c91d73dd3b0c17d2b50d3c6bc8358901962dbf81551688be84593"},
-    {file = "jsonlint-0.1.tar.gz", hash = "sha256:0728ea2827f274ff96a1484b3f5ec5ef7b0954bf7b875ba4a842d8ddf5c74860"},
-]
-
-[package.extras]
-locale = ["Babel (>=1.3)"]
-
-[[package]]
 name = "jsonpath-ng"
 version = "1.7.0"
 description = "A final implementation of JSONPath for Python that aims to be standard compliant, including arithmetic and binary comparison operators and providing clear AST for metaprogramming."
@@ -827,4 +812,4 @@ dev = ["doc8", "flake8", "flake8-import-order", "rstcheck[sphinx]", "sphinx"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "97ab02b661091e1596f2bb4f5beb10eec38e8889f53b3b72aaaf55ded7f8efa1"
+content-hash = "1e0ecf1dab41d0846404bbedb264d5b143fcf8f46970a62cc414fc7fed529cde"

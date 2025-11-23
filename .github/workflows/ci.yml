@@ -38,5 +38,8 @@ jobs:
     - name: Run linting for JSON files
       continue-on-error: true
       run: |
-        poetry run jsonlint .
+        for f in $(find . -name "*.json"); do
+          echo "Checking $f"
+          jsonlint -q "$f"
+        done
 
