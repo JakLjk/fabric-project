@@ -22,5 +22,11 @@ core:
     - Warehouse
     - Environment
 
+features:
+    - enable_experimental_features
+    - enable_config_deploy
+    - enable_shortcut_publish
+    - enable_items_to_include
+
 constants:
     DEFAULT_API_ROOT_URL: "https://api.fabric.microsoft.com"

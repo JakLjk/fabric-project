@@ -24,5 +24,11 @@ core:
   
   parameter: "parameter.yml"
 
+publish:
+  exclude_regex: "^DONT_DEPLOY.*"
+
+unpublish:
+  exclude_regex: "^DEBUG.*"
+
 constants:
     DEFAULT_API_ROOT_URL: "https://api.fabric.microsoft.com"
