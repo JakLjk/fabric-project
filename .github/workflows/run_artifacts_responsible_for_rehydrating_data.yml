@@ -1,4 +1,4 @@
-name: Rehydrate Data
+name: Rehydrate Data For Selected Environment
 on: 
   workflow_dispatch:
     inputs:
