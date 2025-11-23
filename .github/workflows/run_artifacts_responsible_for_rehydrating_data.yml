@@ -1,16 +1,15 @@
-name: Rehydrate Data
+name: Rehydrate Data For Selected Environment
 on: 
   workflow_dispatch:
     inputs:
-    environment:
-      description: "Environment to run against"
-      required: true
-      type: choice
-      options:
-        - dev
-        - test
-        - prod
-
+      environment:
+        description: "Environment to run against"
+        required: true
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
 
 
 env:
@@ -21,7 +20,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
       - name: Setup Python
@@ -34,7 +33,7 @@ jobs:
       - name: Determine pipeline for selected environment
         id: pipeline
         run: |
-          case "${{ inputs.environment }}" in
+          case "${{ github.event.inputs.environment }}" in
             dev)
               PIPELINE="devOrchestration.Workspace/pip_orchestrateDataRefresh.DataPipeline"
               ;;
