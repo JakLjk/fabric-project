@@ -1,0 +1,70 @@
+name: Post Deployment Tests
+
+
+on:
+  workflow_dispatch:
+
+env:
+  AZURE_TENANT_ID:      ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_ID:      ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET:  ${{ secrets.AZURE_CLIENT_SECRET }}
+
+  # Map branch → environment name
+  FABRIC_ENVIRONMENT: >-
+    ${{ github.ref_name == 'dev'  && 'DEV'  ||
+        github.ref_name == 'test' && 'TEST' ||
+        github.ref_name == 'main' && 'PROD' ||
+        'DEV' }}
+
+  # Map branch → workspace id
+  STORE_WS_ID: >-
+    ${{ github.ref_name == 'dev'  && vars.STORE_DEV_WS_ID  ||
+        github.ref_name == 'test' && vars.STORE_TEST_WS_ID ||
+        github.ref_name == 'main' && vars.STORE_PROD_WS_ID ||
+        vars.STORE_DEV_WS_ID }}
+
+  LAKEHOUSE_ID_testLH1: >-
+    ${{ github.ref_name == 'dev'  && vars.STORE_DEV_LH1_ID  ||
+        github.ref_name == 'test' && vars.STORE_TEST_LH1_ID ||
+        github.ref_name == 'main' && vars.STORE_PROD_LH1_ID ||
+        vars.STORE_DEV_LH1_ID }}
+
+  # Optionally: a single endpoint env that switches by branch
+  FABRIC_SQL_ENDPOINT_LH1: >-
+    ${{ github.ref_name == 'dev'  && vars.STORE_DEV_LH1_SQL_ENDPOINT  ||
+        github.ref_name == 'test' && vars.STORE_TEST_LH1_SQL_ENDPOINT ||
+        github.ref_name == 'main' && vars.STORE_PROD_LH1_SQL_ENDPOINT ||
+        vars.STORE_DEV_LH1_SQL_ENDPOINT }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show context
+        run: |
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "FABRIC_ENVIRONMENT: $FABRIC_ENVIRONMENT"
+          echo "INTEGRATION_WORKSPACE_ID: $INTEGRATION_WORKSPACE_ID"
+          echo "FABRIC_SQL_ENDPOINT_LH1: $FABRIC_SQL_ENDPOINT_LH1"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.2.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-root --with test
+
+      - name: Run Pytest pipeline
+        run: |
+          poetry run pytest
+
+
