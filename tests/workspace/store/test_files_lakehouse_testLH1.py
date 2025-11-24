@@ -61,14 +61,7 @@ def env():
 
 @pytest.fixture(scope="session")
 def lakehouse_ids(env):
-    if env == "DEV":
-        return os.environ["ENGINEERING_DEV_WS_ID"], os.environ["DEV_LH1_ID"]
-    elif env == "TEST":
-        return os.environ["ENGINEERING_TEST_WS_ID"], os.environ["TEST_LH1_ID"]
-    elif env == "PROD":
-        return os.environ["ENGINEERING_PROD_WS_ID"], os.environ["PROD_LH1_ID"]
-    else:
-        raise ValueError(f"Unknown env {env}")
+    return os.environ["STORE_WS_ID"], os.environ["PROD_LH1_ID"]
 
 def test_root_folder_has_files(env, lakehouse_ids):
     ws_id, lh_id = lakehouse_ids

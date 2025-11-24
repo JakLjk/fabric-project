@@ -10,7 +10,7 @@ def env():
 
 @pytest.fixture(scope="session")
 def conn(env):
-    endpoint = os.environ[f"FABRIC_SQL_ENDPOINT_LH1_{env}"]
+    endpoint = os.environ["FABRIC_SQL_ENDPOINT_LH1"]
     database = "testLH1"
 
     client_id = os.environ["AZURE_CLIENT_ID"]
