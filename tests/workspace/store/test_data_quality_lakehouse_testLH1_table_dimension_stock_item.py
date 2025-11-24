@@ -16,7 +16,7 @@ def conn(env):
     client_id = os.environ["AZURE_CLIENT_ID"]
     client_secret = os.environ["AZURE_CLIENT_SECRET"]
 
-    driver = "{ODBC Driver 17 for SQL Server}"
+    driver = "{ODBC Driver 18 for SQL Server}"
  
     connection_string = (
         f"Driver={driver};"
