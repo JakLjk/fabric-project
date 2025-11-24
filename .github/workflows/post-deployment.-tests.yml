@@ -42,12 +42,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-    
+
       - name: Show context
         run: |
           echo "Branch: $GITHUB_REF_NAME"
           echo "FABRIC_ENVIRONMENT: $FABRIC_ENVIRONMENT"
-          echo "INTEGRATION_WORKSPACE_ID: $INTEGRATION_WORKSPACE_ID"
+          echo "STORE_WS_ID: $STORE_WS_ID"
+          echo "LAKEHOUSE_ID_testLH1: $LAKEHOUSE_ID_testLH1"
           echo "FABRIC_SQL_ENDPOINT_LH1: $FABRIC_SQL_ENDPOINT_LH1"
 
       - uses: actions/setup-python@v5

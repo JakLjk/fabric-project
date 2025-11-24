@@ -61,7 +61,10 @@ def env():
 
 @pytest.fixture(scope="session")
 def lakehouse_ids(env):
-    return os.environ["STORE_WS_ID"], os.environ["PROD_LH1_ID"]
+    ws_id = os.environ["STORE_WS_ID"]
+    lh_id = os.environ["LAKEHOUSE_ID_testLH1"]
+    return ws_id, lh_id
+
 
 def test_root_folder_has_files(env, lakehouse_ids):
     ws_id, lh_id = lakehouse_ids
