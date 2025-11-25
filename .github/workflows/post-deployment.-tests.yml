@@ -1,0 +1,84 @@
+name: Post Deployment Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: "Target environment"
+        required: true
+        options:
+          - DEV
+          - TEST
+          - PROD
+
+env:
+  AZURE_TENANT_ID:     ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_CLIENT_ID:     ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+  # pass environment name into tests
+  FABRIC_ENVIRONMENT:  ${{ inputs.environment }}
+
+  # Map selected environment → your existing env-specific variable names
+  STORE_WS_ID: >-
+    ${{ inputs.environment == 'DEV'  && vars.STORE_DEV_WS_ID  ||
+        inputs.environment == 'TEST' && vars.STORE_TEST_WS_ID ||
+        inputs.environment == 'PROD' && vars.STORE_PROD_WS_ID ||
+        vars.STORE_DEV_WS_ID }}
+
+  LAKEHOUSE_ID_testLH1: >-
+    ${{ inputs.environment == 'DEV'  && vars.STORE_DEV_LH1_ID  ||
+        inputs.environment == 'TEST' && vars.STORE_TEST_LH1_ID ||
+        inputs.environment == 'PROD' && vars.STORE_PROD_LH1_ID ||
+        vars.STORE_DEV_LH1_ID }}
+
+  FABRIC_SQL_ENDPOINT_LH1: >-
+    ${{ inputs.environment == 'DEV'  && vars.STORE_DEV_LH1_SQL_ENDPOINT  ||
+        inputs.environment == 'TEST' && vars.STORE_TEST_LH1_SQL_ENDPOINT ||
+        inputs.environment == 'PROD' && vars.STORE_PROD_LH1_SQL_ENDPOINT ||
+        vars.STORE_DEV_LH1_SQL_ENDPOINT }}
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show context
+        run: |
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "FABRIC_ENVIRONMENT: $FABRIC_ENVIRONMENT"
+          echo "STORE_WS_ID: $STORE_WS_ID"
+          echo "LAKEHOUSE_ID_testLH1: $LAKEHOUSE_ID_testLH1"
+          echo "FABRIC_SQL_ENDPOINT_LH1: $FABRIC_SQL_ENDPOINT_LH1"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install SQL Server ODBC driver
+        run: |
+          curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+          sudo apt-get update
+          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.2.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-root --with test
+
+      - name: Run Pytest pipeline
+        run: |
+          poetry run pytest -vvv
+
+

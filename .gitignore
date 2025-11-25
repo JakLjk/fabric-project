@@ -1,3 +1,4 @@
 .env
 *.log
-.ruff_cache
+*_cache
+__pycache__

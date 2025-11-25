@@ -1,0 +1,84 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "13139c04-fda3-ab8b-4ec7-5ae4a47ca509",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "ENV": {
+              "value": {
+                "value": "@pipeline().parameters.EnvironmentName",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "testLH1_data_tests",
+        "dependsOn": []
+      },
+      {
+        "type": "Wait",
+        "typeProperties": {
+          "waitTimeInSeconds": 35
+        },
+        "name": "Wait1",
+        "dependsOn": [
+          {
+            "activity": "testLH1_data_tests",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "c458ff54-bf33-8408-4b60-28d332ef0af4",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "ENV": {
+              "value": {
+                "value": "@pipeline().parameters.EnvironmentName",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "testLH1_file_tests",
+        "dependsOn": [
+          {
+            "activity": "Wait1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "EnvironmentName": {
+        "type": "string",
+        "defaultValue": "DEV"
+      }
+    }
+  }
+}
