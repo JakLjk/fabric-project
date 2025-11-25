@@ -21,6 +21,9 @@ core:
     - Dataflow
     - Warehouse
     - Environment
+publish:
+    # Optional - pattern to exclude items from publishing
+    exclude_regex: ^example_.*\.Notebook$
 
 features:
     - enable_experimental_features
