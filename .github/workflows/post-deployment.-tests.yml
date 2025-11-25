@@ -79,6 +79,6 @@ jobs:
 
       - name: Run Pytest pipeline
         run: |
-          poetry run pytest
+          poetry run pytest -vvv
 
 
