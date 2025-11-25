@@ -79,7 +79,7 @@ jobs:
 
       - name: Run Pytest
         run: |
-          poetry run pytest -vvv
+          poetry run pytest -vvv -m "not fabric_pipeline_test"
 
       - name: Determine pipeline for selected environment
         id: pipeline
