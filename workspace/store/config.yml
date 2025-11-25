@@ -23,7 +23,7 @@ core:
     - Environment
 publish:
     # Optional - pattern to exclude items from publishing
-    exclude_regex: ^example_.*\.Notebook$
+    exclude_regex: "^example.*"
 
 features:
     - enable_experimental_features

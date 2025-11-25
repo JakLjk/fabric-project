@@ -77,8 +77,42 @@ jobs:
         run: |
           poetry install --no-interaction --no-root --with test
 
-      - name: Run Pytest pipeline
+      - name: Run Pytest
         run: |
           poetry run pytest -vvv
+
+      - name: Determine pipeline for selected environment
+        id: pipeline
+        run: |
+          case "${{ github.event.inputs.environment }}" in
+            dev)
+              PIPELINE="devStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
+              ;;
+            test)
+              PIPELINE="testStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
+              ;;
+            prod)
+              PIPELINE="prodStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
+              ;;
+            *)
+              echo "Unknown environment: ${{ inputs.environment }}"
+              exit 1
+              ;;
+          esac
+
+          echo "pipeline=$PIPELINE" >> "$GITHUB_OUTPUT"
+
+      - name: Login to fabric CLI using Service Principal
+        run: |
+          fab config set encryption_fallback_enabled true
+          
+          fab auth login \
+            -u "${{ secrets.AZURE_CLIENT_ID }}" \
+            -p "${{ secrets.AZURE_CLIENT_SECRET }}" \
+            --tenant "${{ secrets.AZURE_TENANT_ID }}"
+
+      - name: Run pipeline responsible for testing data in testLH1
+        run: |
+          fab job run ${{ steps.pipeline.outputs.pipeline }}
 
 
