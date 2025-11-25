@@ -85,13 +85,13 @@ jobs:
         id: pipeline
         run: |
           case "${{ github.event.inputs.environment }}" in
-            dev)
+            DEV)
               PIPELINE="devStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
               ;;
-            test)
+            TEST)
               PIPELINE="testStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
               ;;
-            prod)
+            PROD)
               PIPELINE="prodStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
               ;;
             *)
