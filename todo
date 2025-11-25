@@ -1,11 +1,12 @@
 - tests
-    - From Chatgpt
+
     - ask gpt about tests form this article: https://www.kevinrchant.com/2024/08/30/
         - So not only data tests but for other elements as well
-    - ask chat abbout using mssparkutils for notebook tests
+
     - tests from fabric toolbox github
 
     - Read about pytest (and maybe other framewrks)
+
     - Build my own test based on this ones (data test and other)
 
 

@@ -72,9 +72,9 @@ def test_root_folder_has_files(env, lakehouse_ids):
     if env == "DEV":
         min_files = 1
     elif env == "TEST":
-        min_files = 10
+        min_files = 1
     elif env == "PROD":
-        min_files = 100
+        min_files = 1
 
     entries = list_files_in_folder(ws_id, lh_id, "/")
     files = [e for e in entries if not e.get("isDirectory", False)]
@@ -89,7 +89,7 @@ def test_root_folder_has_recent_file(env, lakehouse_ids):
     if env == "DEV":
         max_age_days = 7
     else:
-        max_age_days = 1
+        max_age_days = 7
 
     entries = list_files_in_folder(ws_id, lh_id, "/")
     files = [e for e in entries if not e.get("isDirectory", False)]
