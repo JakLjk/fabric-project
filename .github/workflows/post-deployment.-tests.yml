@@ -89,10 +89,10 @@ jobs:
               PIPELINE="devStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
               ;;
             test)
-              PIPELINE="devStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
+              PIPELINE="testStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
               ;;
             prod)
-              PIPELINE="devStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
+              PIPELINE="prodStore.Workspace/tests.Folder/tests_orchestration_pipeline.DataPipeline"
               ;;
             *)
               echo "Unknown environment: ${{ inputs.environment }}"
