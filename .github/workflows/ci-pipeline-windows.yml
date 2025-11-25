@@ -1,0 +1,40 @@
+name: Test Fabric Data Pipelines
+on:
+  pull_request:
+    branches: [ "*" ]
+jobs:
+  test-dp:
+    name: Test Data Pipeline
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses:  actions/checkout@v4
+
+      - name: Use Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.2.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction --no-root --with test
+
+      - name: Run data tests pipeline test
+        shell: pwsh
+        run: |
+          poetry run pytest -vvv -m fabric_pipeline_test --junitxml=simple-pipeline-test-results.xml
+
+      - name: Upload Pipeline Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: simple-pipeline-test-results
+          path: simple-pipeline-test-results.xml
+
